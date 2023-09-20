@@ -175,11 +175,11 @@
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本过程完全按照CodeSheep的视频操作，区别是在Windows环境下而非MacOS下部署。在此完全描述出所有步骤，以及踩过的一些坑。</p>
 <h1 id="一、前置环境搭建"><a href="#一、前置环境搭建" class="headerlink" title="一、前置环境搭建"></a>一、前置环境搭建</h1><h2 id="Node-JS、npm安装"><a href="#Node-JS、npm安装" class="headerlink" title="Node.JS、npm安装"></a>Node.JS、npm安装</h2><p>进入官网<a target="_blank" rel="noopener" href="https://nodejs.org选择lts/">https://nodejs.org选择LTS</a>(Long Term Support)版本执行全默认安装即可。</p>
 <p>使用PowerShell（管理员模式）输入命令：<br>node -v<br>npm - v<br>验证安装是否成功</p>
-<h2 id="cnpm安装"><a href="#cnpm安装" class="headerlink" title="cnpm安装"></a>cnpm安装</h2><p>npm install -g cnpm –registry&#x3D;<a target="_blank" rel="noopener" href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>	#安装淘宝源的 cnpm 管理器</p>
+<h2 id="cnpm安装"><a href="#cnpm安装" class="headerlink" title="cnpm安装"></a>cnpm安装</h2><p><code>npm install -g cnpm --registry=http://registry.npm.taobao.org	#安装淘宝源的 cnpm 管理器</code></p>
 <h2 id="两个坑"><a href="#两个坑" class="headerlink" title="两个坑"></a>两个坑</h2><ul>
-<li><p>安装cnpm提示”x packages are looking for funding.”<br>可选择忽略或install或使用npm install –no-fund  -g cnpm –registry&#x3D;<a href="http://registry.npm.taobao.org的方式跳过fund。[1]">http://registry.npm.taobao.org的方式跳过fund。[1]</a></p>
+<li><p>安装cnpm提示”x packages are looking for funding.”<br>可选择忽略或install或使用<code>npm install --no-fund  -g cnpm --registry=http://registry.npm.taobao.org</code>的方式跳过fund。<sup>[1]</sup></p>
 </li>
-<li><p>输入 cnpm -v 后提示”无法加载文件 C:\Users*****\AppData\Roaming\npm\cnpm.ps1，因为在此系统上禁止运行脚本”<br>请使用命令 set-ExecutionPolicy RemoteSigned 允许在系统上运行脚本。[2]</p>
+<li><p>输入 cnpm -v 后提示”无法加载文件 C:\Users*****\AppData\Roaming\npm\cnpm.ps1，因为在此系统上禁止运行脚本”<br>请使用命令 set-ExecutionPolicy RemoteSigned 允许在系统上运行脚本。<sup>[2]</sup></p>
 </li>
 </ul>
 <hr>
@@ -187,7 +187,7 @@
 <h2 id="坑"><a href="#坑" class="headerlink" title="坑"></a>坑</h2><ul>
 <li><p>安装过程提示需要git<br><a target="_blank" rel="noopener" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> 官方提供两种方式安装，这里使用PowerShell中的命令行安装，命令如下：<br>winget install –id Git.Git -e –source winget<br>重启PowerShell后即安装成功</p>
 </li>
-<li><p>Git报错： Failed to connect to github.com port 443 解决方案<br>由于我手里有魔法，故根据CSDN上的教程[3]修改sock5和http代理即可</p>
+<li><p>Git报错： Failed to connect to github.com port 443 解决方案<br>由于我手里有魔法，故根据CSDN上的教程<sup>[3]</sup>修改sock5和http代理即可</p>
 </li>
 </ul>
 <h2 id="Hexo的配置"><a href="#Hexo的配置" class="headerlink" title="Hexo的配置"></a>Hexo的配置</h2><ul>
