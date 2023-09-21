@@ -172,7 +172,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在写第二篇博文的时候遇到的一个问题，本地存储的图片部署后无法显示到网页上。为了解决这个问题需要做两处修改。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>在写第二篇博文（Markdown学习笔记）的时候遇到的一个问题，本地存储的图片部署后无法显示到网页上。为了解决这个问题需要做两处修改。</p>
 <h1 id="一、修改VSCode默认图片存储位置-1"><a href="#一、修改VSCode默认图片存储位置-1" class="headerlink" title="一、修改VSCode默认图片存储位置^1"></a>一、修改VSCode默认图片存储位置<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xbotter/p/17528063.html">^1</a></h1><p>首先 <code>Ctrl</code> + <code>,</code> 打开VSCode的设置首选项。搜索“markdown image”，添加一个项-值对为：<code>**/*.md</code>, <code>$&#123;documentBaseName&#125;/$&#123;fileName&#125;</code>。保存并退出。</p>
 <p><img src="/2023/09/21/VSCode-Hexo%E5%AE%9E%E7%8E%B0%E6%9C%AC%E5%9C%B0%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0/image.png" alt="Alt text"></p>
 <p>这样后续粘贴进VS文本框的图片将会存放在.md文件同级目录下的同名文件夹中，方便进行文件管理。</p>
@@ -391,7 +391,7 @@
 <h3 id="给链接增加Title"><a href="#给链接增加Title" class="headerlink" title="给链接增加Title"></a>给链接增加Title</h3><p>链接title是当鼠标悬停在链接上时会出现的文字，这个title是可选的，它放在圆括号中链接地址后面，跟链接地址之间以空格分隔。<br><code>这是一个链接 [Markdown语法](https://markdown.com.cn &quot;最好的markdown教程&quot;)。</code><br>渲染效果如下：<br>这是一个链接 <a target="_blank" rel="noopener" href="https://markdown.com.cn/" title="最好的markdown教程">Markdown语法</a>。</p>
 <h3 id="网址和Email地址"><a href="#网址和Email地址" class="headerlink" title="网址和Email地址"></a>网址和Email地址</h3><p>使用尖括号可以很方便地把URL或者Email地址变成可点击的链接。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;https://markdown.com.cn&gt;</span><br><span class="line">&lt;1069667084@qq.com&gt;</span><br></pre></td></tr></table></figure>
-<p>渲染效果如下：<br><a target="_blank" rel="noopener" href="https://markdown.com.cn/">https://markdown.com.cn</a><br><a href="mailto:&#x31;&#x30;&#54;&#57;&#54;&#54;&#x37;&#x30;&#56;&#x34;&#x40;&#113;&#113;&#x2e;&#99;&#x6f;&#109;">&#x31;&#x30;&#54;&#57;&#54;&#54;&#x37;&#x30;&#56;&#x34;&#x40;&#113;&#113;&#x2e;&#99;&#x6f;&#109;</a></p>
+<p>渲染效果如下：<br><a target="_blank" rel="noopener" href="https://markdown.com.cn/">https://markdown.com.cn</a><br><a href="mailto:&#49;&#x30;&#x36;&#57;&#x36;&#54;&#x37;&#x30;&#56;&#52;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;">&#49;&#x30;&#x36;&#57;&#x36;&#54;&#x37;&#x30;&#56;&#52;&#64;&#x71;&#x71;&#46;&#99;&#x6f;&#x6d;</a></p>
 <h3 id="带格式化的链接"><a href="#带格式化的链接" class="headerlink" title="带格式化的链接"></a>带格式化的链接</h3><p><em><strong><a target="_blank" rel="noopener" href="https://markdown.com.cn/" title="最好的markdown教程">强调</a></strong></em> 链接，在链接语法前后增加星号。要将链接表示为代码，请在方括号中添加反引号。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">I love supporting the **[EFF](https://eff.org)**.</span><br><span class="line">This is the *[Markdown Guide](https://www.markdownguide.org)*.</span><br><span class="line">See the section on [`code`](#code).</span><br></pre></td></tr></table></figure>
 <p>渲染效果如下：<br>I love supporting the <strong><a target="_blank" rel="noopener" href="https://eff.org/">EFF</a></strong>.<br>This is the <em><a target="_blank" rel="noopener" href="https://www.markdownguide.org/">Markdown Guide</a></em>.<br>See the section on <a href="#code"><code>code</code></a>.</p>
