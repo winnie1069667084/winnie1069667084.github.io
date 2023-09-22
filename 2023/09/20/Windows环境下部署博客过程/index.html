@@ -434,7 +434,7 @@
     Fluid.utils.loadComments('#valine', function() {
       Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"appId":"7fjp4GW5sce76vLY6yG0oW33-gzGzoHsz","appKey":"pV5kY8OYK8dcXQ0onyg9YfaE","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":true,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
+          {"appId":"7fjp4GW5sce76vLY6yG0oW33-gzGzoHsz","appKey":"pV5kY8OYK8dcXQ0onyg9YfaE","path":"window.location.pathname","placeholder":null,"avatar":"robohash","meta":["nick","mail"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://7fjp4gw5.lc-cn-n1-shared.com","emojiCDN":null,"emojiMaps":null,"enableQQ":true},
           {
             el: "#valine",
             path: window.location.pathname
@@ -559,14 +559,14 @@
   
     
       <span id="leancloud-site-pv-container" style="display: none">
-        总访问量 
+        访问量 
         <span id="leancloud-site-pv"></span>
          次
       </span>
     
     
       <span id="leancloud-site-uv-container" style="display: none">
-        总访客数 
+        访客数 
         <span id="leancloud-site-uv"></span>
          人
       </span>
