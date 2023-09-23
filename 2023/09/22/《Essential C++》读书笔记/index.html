@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言Lippman在前言部分明确的阐明了本书的写作目的：“C++ Primer第三版其实无法扮演人们在初学C++时的导师角色。它太庞大了”。 结构与组织结构与组织部分可能很好的说明了此书的组织架构，但我现在还看不懂，就先不重复了。之后会讲每一部分的内容附加到相应章节之前。 关于源代码本书所有的程序，以及习题解答中的完整代码，都可以从网上获得。可以在Addison Wesley的网站或博文视点网站取">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-22T07:15:30.000Z">
-<meta property="article:modified_time" content="2023-09-23T01:18:30.222Z">
+<meta property="article:modified_time" content="2023-09-23T04:20:50.238Z">
 <meta property="article:author" content="Winnie">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3k 字
+          3.6k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          26 分钟
+          31 分钟
         
       </span>
     
@@ -342,7 +342,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：7 分钟前
+                    本文最后更新于：几秒前
                   
                 
               </p>
@@ -443,8 +443,23 @@
 <li>除了local scope和file scope，还有一种储存其形式成为dynamic extent（动态范围）。其内存有程序的空闲空间（free store）分配而来，有时也称为heap memory（堆内存）。这种内存必须由程序员自行管理，其分配通过new来完成，释放通过delete表达式完成。</li>
 <li>由于某种原因，程序员不想使用delete表达式，由heap分配而来的对象就永远不会被释放，这称为内存泄漏（memory leak）。</li>
 </ul>
-<h2 id="2-3提供默认参数"><a href="#2-3提供默认参数" class="headerlink" title="2.3提供默认参数"></a>2.3提供默认参数</h2><p>* </p>
-
+<h2 id="2-3提供默认参数"><a href="#2-3提供默认参数" class="headerlink" title="2.3提供默认参数"></a>2.3提供默认参数</h2><ul>
+<li>默认参数值的提供有两个不直观的规则：<ol>
+<li>默认值的解析（resolve）操作由最右边开始进行。如果我们为某个参数提供了默认值，那么这一参数右侧的所有参数都必须也具有默认参数才行。下面这样实属非法：  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">//错误：没有为vec提供默认值</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">display</span><span class="hljs-params">( ostream &amp;os = <span class="hljs-built_in">cout</span>, <span class="hljs-type">const</span> <span class="hljs-built_in">vector</span>&lt;<span class="hljs-type">int</span>&gt; &amp;vec)</span>;<br></code></pre></td></tr></table></figure></li>
+<li>默认值只能指定一次，可以在声明处，亦可在函数定义处，但不能够在两个地方都指定。（头文件可为函数带来更高的可见性（visibility）为了更高的可见性，我们决定将默认值放在函数声明处而非定义处。）</li>
+</ol>
+</li>
+</ul>
+<h2 id="2-4-使用局部静态对象"><a href="#2-4-使用局部静态对象" class="headerlink" title="2.4 使用局部静态对象"></a>2.4 使用局部静态对象</h2><ul>
+<li>为了节省函数见的通信问题而将对象定义于file scope中，永远都是一种冒险。通常，file scope对象会打乱不同函数间的独立性，使它们难以理解。</li>
+<li>局部静态对象所处的内存空间，即使在不同的函数调用过程中，依然持续存在，这也就是我们可以安全地返回其地址的原因。</li>
+</ul>
+<h2 id="2-5-声明inline函数"><a href="#2-5-声明inline函数" class="headerlink" title="2.5 声明inline函数"></a>2.5 声明inline函数</h2><ul>
+<li>将函数声明为inline，表示要求编译器在每个函数调用点上，将函数内容展开。面对一个inline函数，编译器可将该函数的调用操作改为以一份函数代码副本代替。这将是我们获得性能改善，其结果是把多个函数写入一个函数中，但依然维持三个独立的运算单元。</li>
+<li>一般而言，最适合声明为inline1的函数具有如下特征：体积小、常被调用、所从事的计算并不复杂。</li>
+<li>inline函数的定义常被放在头文件中。</li>
+</ul>
+<h2 id="2-6-提供重载函数"><a href="#2-6-提供重载函数" class="headerlink" title="2.6 提供重载函数"></a>2.6 提供重载函数</h2>
                 
               </div>
             
