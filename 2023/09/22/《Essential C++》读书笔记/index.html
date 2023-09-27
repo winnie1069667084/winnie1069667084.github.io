@@ -24,7 +24,7 @@
 <meta property="og:description" content="前言Lippman在前言部分明确的阐明了本书的写作目的：“C++ Primer第三版其实无法扮演人们在初学C++时的导师角色。它太庞大了”。 结构与组织结构与组织部分可能很好的说明了此书的组织架构，但我现在还看不懂，就先不重复了。之后会讲每一部分的内容附加到相应章节之前。 关于源代码本书所有的程序，以及习题解答中的完整代码，都可以从网上获得。可以在Addison Wesley的网站或博文视点网站取">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-09-22T07:15:30.000Z">
-<meta property="article:modified_time" content="2023-09-26T09:56:25.685Z">
+<meta property="article:modified_time" content="2023-09-27T03:36:45.744Z">
 <meta property="article:author" content="Winnie">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -225,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          14k 字
+          16k 字
         
       </span>
     
@@ -236,7 +236,7 @@
         
         
         
-          118 分钟
+          134 分钟
         
       </span>
     
@@ -342,7 +342,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：6 分钟前
+                    本文最后更新于：几秒前
                   
                 
               </p>
@@ -708,8 +708,48 @@
 <li>建议将所有的template类型参数视为“class类型”来处理，不要选择在constructor内初始化。这意味着我们会把它声明为一个const reference，而非以by value的方式传递。</li>
 </ul>
 <h2 id="6-4-实现一个Class-Template"><a href="#6-4-实现一个Class-Template" class="headerlink" title="6.4 实现一个Class Template"></a>6.4 实现一个Class Template</h2><ul>
-<li><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/Poo_Chai/article/details/91596538">https://blog.csdn.net/Poo_Chai/article/details/91596538</a>
-<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section></li>
+<li>new表达式可以分解为两个操作：<ol>
+<li>向程序的空闲空间（free store）请求内存。如果分配到足够的空间，就分配一个指针，指向新对象。</li>
+<li>如果第一步成功，并且外界指定了一个初值，这个新对象便会以最适当的方式被初始化。</li>
+</ol>
+</li>
+<li>二叉树中移除某值的一般算法是，以节点的右子节点取代节点本身，然后搬移左子节点，使它成为右子节点的左子树的叶节点。</li>
+<li>声明一个reference to pointer，我们不但可以改变pointer本身，也可以改变由此pointer指向的对象。</li>
+</ul>
+<h2 id="6-5-一个以Function-Template完成的Output运算符"><a href="#6-5-一个以Function-Template完成的Output运算符" class="headerlink" title="6.5 一个以Function Template完成的Output运算符"></a>6.5 一个以Function Template完成的Output运算符</h2><h2 id="6-6-常量表达式与默认参数值"><a href="#6-6-常量表达式与默认参数值" class="headerlink" title="6.6 常量表达式与默认参数值"></a>6.6 常量表达式与默认参数值</h2><ul>
+<li>Template参数并不是非得某种类型（type）不可。我们也可以用常量表达式（constant expression）作为template参数。</li>
+<li>全局作用域（global scope）内的函数及对象，其地址也是一种常量表达式，因此也可以被拿来表达这一形式的参数。</li>
+</ul>
+<h2 id="6-7-以Template参数作为一种设计策略"><a href="#6-7-以Template参数作为一种设计策略" class="headerlink" title="6.7 以Template参数作为一种设计策略"></a>6.7 以Template参数作为一种设计策略</h2><ul>
+<li>class template无法基于参数列表的不同而重载。</li>
+</ul>
+<h2 id="6-8-Member-Template-Function"><a href="#6-8-Member-Template-Function" class="headerlink" title="6.8 Member Template Function"></a>6.8 Member Template Function</h2><ul>
+<li>Non-template class或class template内都可定义member template function。</li>
+</ul>
+<h1 id="第7章-异常处理"><a href="#第7章-异常处理" class="headerlink" title="第7章 异常处理"></a>第7章 异常处理</h1><p>第7章介绍了如何使用C++的异常处理机制（exception handling facility），并示范如何将它融入标准库所定义的异常体系中。</p>
+<h2 id="7-1-抛出异常"><a href="#7-1-抛出异常" class="headerlink" title="7.1 抛出异常"></a>7.1 抛出异常</h2><ul>
+<li>异常处理机制有两个主要成分：异常的鉴定与发出，以及异常的处理方式。</li>
+<li>异常出现之后，正常程序的执行便被暂停（suspended）。与此同时，异常处理机制开始搜索程序中有能力处理这一异常的地点。异常被处理完毕之后，程序的执行便会继续（resume），从异常处理点接着执行下去。</li>
+<li>所谓异常（<strong>exception</strong>）是某种对象。大部分时候，被抛出的异常都属于特定的异常类（也许形成一个继承体系）。我们只是令它得以储存某些必要数据，用以表示异常的性质，以便我们得以在不同程序的不同调用点上相互传递这些性质。</li>
+</ul>
+<h2 id="7-2-捕获异常"><a href="#7-2-捕获异常" class="headerlink" title="7.2 捕获异常"></a>7.2 捕获异常</h2><ul>
+<li>我们可以利用单条或一连串的catch子句来捕获（catch）被抛出的异常对象。catch子句由三部分组成：关键字catch、小括号内的一个类型或对象、大括号内的一组语句（用以处理异常）。</li>
+<li>异常对象的类型会被拿来逐一地和每个catch子句比对。如果类型符合，那么该catch子句的内容便会被执行。</li>
+<li>有时候我们可能无法完成异常的完整处理。在记录信息之外，我们或许需要重新抛出（rethrow）异常，以寻求其它catch子句的协助，做进一步的处理。重新抛出时，只需要写下关键字throw即可。它只能出现于catch子句中。它会将捕获的异常对象再一次抛出，并由另一个类型吻合的catch子句接受处理。</li>
+<li>如果我们想要捕获任何类型的异常，可以使用一网打尽（catch-all）的方式。只需在异常声明部分指定省略号（…）即可，像这样：  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">//捕获任何类型的异常</span><br><span class="hljs-built_in">catch</span>( ... )<br>&#123;<br>    ...<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="7-3-提炼异常"><a href="#7-3-提炼异常" class="headerlink" title="7.3 提炼异常"></a>7.3 提炼异常</h2><ul>
+<li>catch子句应该和try块相应而生。try块是以关键字try作为开始，然后是大括号内的一连串程序语句。catch子句放在try块的末尾，这表示如果try块内有任何异常发生，便由接下来的catch子句加以处理。</li>
+<li>如果“函数调用链”不断地被解开，一直回到了main（）还是找不到合适的catch子句。C++规定，每个异常都应该被处理。因此，标准库提供的terminate()便被调用——其默认行为时是中断整个程序的执行。</li>
+</ul>
+<h2 id="7-4-局部资源管理"><a href="#7-4-局部资源管理" class="headerlink" title="7.4 局部资源管理"></a>7.4 局部资源管理</h2><ul>
+<li><strong>Resource acquisition initialization（在初始化阶段即进行资源请求）</strong>：对对象而言，初始化操作发生在constructor中，资源的请求亦发生在constructor内。资源的释放则应在destructor内完成。在异常处理机制终结某个函数之前，C++保证，函数中的所有局部对象的destructor都会被调用。</li>
+<li>auto_ptr是标准库提供的class template，它会自动删除通过new表达式分配的对象。使用它前，必须包含相应的memory头文件：  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span></span><br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="7-5-标准异常"><a href="#7-5-标准异常" class="headerlink" title="7.5 标准异常"></a>7.5 标准异常</h2><ul>
+<li>如果new表达式无法从程序的空闲空间（free store）分配到足够的内存，它会抛出bad_alloc异常对象。</li>
+<li>标准库定义了一套异常类体系（exception class hierarchy），其根部是名为exception的抽象基类。</li>
+<li>bad_alloc派生自exception基类。<section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://blog.csdn.net/Poo_Chai/article/details/91596538">https://blog.csdn.net/Poo_Chai&#x2F;article&#x2F;details&#x2F;91596538</a><br><a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section></li>
 </ul>
 
                 
