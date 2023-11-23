@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/2023/11/20/Leetcode59-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-II/image.png">
 <meta property="og:image" content="http://example.com/2023/11/20/Leetcode59-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-II/image-1.png">
 <meta property="article:published_time" content="2023-11-20T07:40:05.000Z">
-<meta property="article:modified_time" content="2023-11-20T07:58:16.355Z">
+<meta property="article:modified_time" content="2023-11-23T01:57:38.624Z">
 <meta property="article:author" content="Winnie">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2023/11/20/Leetcode59-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-II/image.png">
@@ -301,7 +301,7 @@
         aria-expanded="true"
       >
         Leetcode
-        <span class="list-group-count">(1)</span>
+        <span class="list-group-count">(2)</span>
         <i class="iconfont icon-arrowright"></i>
       </a>
       
@@ -319,6 +319,15 @@
            class="list-group-item list-group-item-action
            active">
           <span class="category-post">Leetcode59.螺旋矩阵 II</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2023/11/23/KMP%E7%AE%97%E6%B3%95/" title="KMP算法"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">KMP算法</span>
         </a>
       
     
@@ -345,7 +354,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：1 分钟前
+                    本文最后更新于：2 小时前
                   
                 
               </p>
@@ -353,13 +362,13 @@
             
               <div class="markdown-body">
                 
-                <h1 id="59-螺旋矩阵-II"><a href="#59-螺旋矩阵-II" class="headerlink" title="59. 螺旋矩阵 II"></a>59. 螺旋矩阵 II</h1><p>给你一个正整数 n ，生成一个包含 1 到 $n^2$ 所有元素，且元素按顺时针顺序螺旋排列的 <code>n x n</code> 正方形矩阵 matrix 。</p>
+                <h1 id="59-螺旋矩阵-II"><a href="#59-螺旋矩阵-II" class="headerlink" title="59. 螺旋矩阵 II"></a>59. 螺旋矩阵 II</h1><p>给你一个正整数 <code>n</code> ，生成一个包含 1 到 $n^2$ 所有元素，且元素按顺时针顺序螺旋排列的 <code>n x n</code> 正方形矩阵 matrix 。</p>
 <p><strong>示例 1：</strong><br><img src="/2023/11/20/Leetcode59-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-II/image.png" srcset="/img/loading.gif" lazyload alt="Alt text"></p>
 <p><strong>输入：</strong> n &#x3D; 3<br><strong>输出：</strong> [[1,2,3],[8,9,4],[7,6,5]]</p>
 <p><strong>示例 2：</strong><br><strong>输入：</strong> n &#x3D; 1<br><strong>输出：</strong> [[1]]</p>
 <p><strong>提示：</strong></p>
 <p>· 1 &lt;&#x3D; n &lt;&#x3D; 20</p>
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>初始化一个 <code>$n×n$</code> 大小的矩阵 <code>$mat$</code>，然后模拟整个向内环绕的填入过程：</p>
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>初始化一个 <code>n×n</code> 大小的矩阵 <code>mat</code>，然后模拟整个向内环绕的填入过程：</p>
 <p>1.定义当前左右上下边界 <code>l,r,t,b</code>，初始值 <code>num = 1</code>，迭代终止值 <code>tar = n * n</code>；</p>
 <p>2.当 <code>num &lt;= tar</code> 时，始终按照从左到右、从上到下、从右到左、从下到上的填入顺序循环，每次填入后：<br>    a.执行 <code>num += 1</code>：得到下一个需要填入的数字；<br>    b.更新边界：例如从左到右填完后，上边界 <code>t += 1</code>，相当于上边界向内缩1。</p>
 <p>3.使用<code>num &lt;= tar</code>而不是<code>l &lt; r || t &lt; b</code>作为迭代条件，是为了解决当n为奇数时，矩阵中心数字无法在迭代过程中被填充的问题。</p>
@@ -408,6 +417,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2023/11/23/KMP%E7%AE%97%E6%B3%95/" title="KMP算法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">KMP算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
