@@ -49,6 +49,14 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>Leetcode</tag>
+      
+      <tag>算法</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -67,6 +75,12 @@
       
     </categories>
     
+    
+    <tags>
+      
+      <tag>计算机科学</tag>
+      
+    </tags>
     
   </entry>
   
@@ -87,6 +101,14 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>笔记</tag>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -105,6 +127,12 @@
       
     </categories>
     
+    
+    <tags>
+      
+      <tag>Markdown</tag>
+      
+    </tags>
     
   </entry>
   
@@ -125,6 +153,12 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -144,6 +178,14 @@
     </categories>
     
     
+    <tags>
+      
+      <tag>Markdown</tag>
+      
+      <tag>笔记</tag>
+      
+    </tags>
+    
   </entry>
   
   
@@ -162,6 +204,12 @@
       
     </categories>
     
+    
+    <tags>
+      
+      <tag>Hexo</tag>
+      
+    </tags>
     
   </entry>
   
