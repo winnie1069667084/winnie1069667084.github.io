@@ -16,12 +16,12 @@
   <meta name="author" content="Winnie">
   <meta name="keywords" content="">
   
-    <meta name="description" content="KMP算法理论篇前言第一次接触KMP算法是在《大话数据结构》这本书上，算是这本书第一个有难度的部分，之后在B站上看了相关视频勉强弄了个半懂。 昨天在Leetcode上再次刷到了KMP——28. 找出字符串中第一个匹配项的下标，但是没法自己写出代码实现，于是又深入的学习了下如何手撕。 这下算是完全懂了，主要参考的是代码随想录对应题目的章节，这里我再按照自己的理解复述一遍。 什么是KMP？KMP这个名">
+    <meta name="description" content="KMP算法 理论篇 前言 第一次接触KMP算法是在《大话数据结构》这本书上，算是这本书第一个有难度的部分，之后在B站上看了相关视频勉强弄了个半懂。 昨天在Leetcode上再次刷到了KMP——28. 找出字符串中第一个匹配项的下标，但是没法自己写出代码实现，于是又深入的学习了下如何手撕。 这下算是完全懂了，主要参考的是代码随想录对应题目的章节，这里我再按照自己的理解复述一遍。 什么是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KMP算法">
 <meta property="og:url" content="http://example.com/2023/11/23/KMP%E7%AE%97%E6%B3%95/index.html">
 <meta property="og:site_name" content="Winnie的个人博客">
-<meta property="og:description" content="KMP算法理论篇前言第一次接触KMP算法是在《大话数据结构》这本书上，算是这本书第一个有难度的部分，之后在B站上看了相关视频勉强弄了个半懂。 昨天在Leetcode上再次刷到了KMP——28. 找出字符串中第一个匹配项的下标，但是没法自己写出代码实现，于是又深入的学习了下如何手撕。 这下算是完全懂了，主要参考的是代码随想录对应题目的章节，这里我再按照自己的理解复述一遍。 什么是KMP？KMP这个名">
+<meta property="og:description" content="KMP算法 理论篇 前言 第一次接触KMP算法是在《大话数据结构》这本书上，算是这本书第一个有难度的部分，之后在B站上看了相关视频勉强弄了个半懂。 昨天在Leetcode上再次刷到了KMP——28. 找出字符串中第一个匹配项的下标，但是没法自己写出代码实现，于是又深入的学习了下如何手撕。 这下算是完全懂了，主要参考的是代码随想录对应题目的章节，这里我再按照自己的理解复述一遍。 什么是">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/11/23/KMP%E7%AE%97%E6%B3%95/image.gif">
 <meta property="og:image" content="http://example.com/2023/11/23/KMP%E7%AE%97%E6%B3%95/image-2.gif">
@@ -244,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.8k 字
+          6.6k 字
         
       </span>
     
@@ -255,7 +255,7 @@
         
         
         
-          57 分钟
+          55 分钟
         
       </span>
     
@@ -370,7 +370,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：几秒前
+                    本文最后更新于：21 分钟前
                   
                 
               </p>
@@ -378,172 +378,277 @@
             
               <div class="markdown-body">
                 
-                <h1 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h1><h2 id="理论篇"><a href="#理论篇" class="headerlink" title="理论篇"></a>理论篇</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>第一次接触KMP算法是在《大话数据结构》这本书上，算是这本书第一个有难度的部分，之后在B站上看了相关视频勉强弄了个半懂。</p>
-<p>昨天在Leetcode上再次刷到了KMP——<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/description/">28. 找出字符串中第一个匹配项的下标</a>，但是没法自己写出代码实现，于是又深入的学习了下如何手撕。</p>
+                <h1 id="kmp算法">KMP算法</h1>
+<h2 id="理论篇">理论篇</h2>
+<h3 id="前言">前言</h3>
+<p>第一次接触KMP算法是在《大话数据结构》这本书上，算是这本书第一个有难度的部分，之后在B站上看了相关视频勉强弄了个半懂。</p>
+<p>昨天在Leetcode上再次刷到了KMP——<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/description/">28.
+找出字符串中第一个匹配项的下标</a>，但是没法自己写出代码实现，于是又深入的学习了下如何手撕。</p>
 <p>这下算是完全懂了，主要参考的是<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0028.%E5%AE%9E%E7%8E%B0strStr.html#%E7%AE%97%E6%B3%95%E5%85%AC%E5%BC%80%E8%AF%BE">代码随想录</a>对应题目的章节，这里我再按照自己的理解复述一遍。</p>
-<h3 id="什么是KMP？"><a href="#什么是KMP？" class="headerlink" title="什么是KMP？"></a>什么是KMP？</h3><p>KMP这个名字来自于发明这个算法的三位学者的名字首字母：Knuth，Morris和Pratt。</p>
+<h3 id="什么是kmp">什么是KMP？</h3>
+<p>KMP这个名字来自于发明这个算法的三位学者的名字首字母：Knuth，Morris和Pratt。</p>
 <p>我还看到一个比较有意思的拼音解释，(K)快速(M)模式(P)匹配，用来形容这个算法再贴切不过了。</p>
-<h3 id="KMP主要解决了什么问题？"><a href="#KMP主要解决了什么问题？" class="headerlink" title="KMP主要解决了什么问题？"></a>KMP主要解决了什么问题？</h3><p>KMP主要解决字符串的子串匹配问题。</p>
-<p>例如：查找字符串 <code>&quot;aabaabaafa&quot;</code> 中是否存在字符串 <code>&quot;aabaaf&quot;</code> 。</p>
+<h3 id="kmp主要解决了什么问题">KMP主要解决了什么问题？</h3>
+<p>KMP主要解决字符串的子串匹配问题。</p>
+<p>例如：查找字符串 <code>"aabaabaafa"</code> 中是否存在字符串
+<code>"aabaaf"</code> 。</p>
 <p>前一个字符串称为<strong>文本串</strong>，后一个字符串称为<strong>模式串</strong>。</p>
-<p>遇到这样的问题，第一反应往往是双层for循环遍历两个字符串来查找是否存在这样的子串（暴力解法），如果文本串的长度记为 <code>m</code> ，模式串的长度记为 <code>n</code> ，则算法的时间复杂度为 <code>O(mn)</code> 。</p>
+<p>遇到这样的问题，第一反应往往是双层for循环遍历两个字符串来查找是否存在这样的子串（暴力解法），如果文本串的长度记为
+<code>m</code> ，模式串的长度记为 <code>n</code> ，则算法的时间复杂度为
+<code>O(mn)</code> 。</p>
 <p>暴力解法当然可以解决字符串匹配问题，Leetcode的28题也可以用这样的方法AC（Accept），但是有没有时间复杂度更低的算法呢？</p>
-<p>KMP算法给出了答案，<em><strong>KMP通过记录已经匹配的字符信息，达到避免重复回溯指针的目的</strong></em>，使算法的时间复杂度能够降低至 <code>O(m + n)</code> 。</p>
+<p>KMP算法给出了答案，<strong><em>KMP通过记录已经匹配的字符信息，达到避免重复回溯指针的目的</em></strong>，使算法的时间复杂度能够降低至
+<code>O(m + n)</code> 。</p>
 <p>那么如何记录已经匹配的字符信息呢？通过<strong>next数组</strong>。</p>
 <p>但在介绍next数组前必须先理清几个概念，何谓<strong>前缀</strong>？何谓<strong>后缀</strong>？何谓<strong>最长相等前后缀</strong>？何谓<strong>前缀表</strong>？</p>
-<h3 id="什么是前缀后缀？"><a href="#什么是前缀后缀？" class="headerlink" title="什么是前缀后缀？"></a>什么是前缀后缀？</h3><p>字符串的<strong>前缀是指不包含最后一个字符的所有以第一个字符开头的连续子串</strong>。</p>
+<h3 id="什么是前缀后缀">什么是前缀后缀？</h3>
+<p>字符串的<strong>前缀是指不包含最后一个字符的所有以第一个字符开头的连续子串</strong>。</p>
 <p>字符串的<strong>后缀是指不包含第一个字符的所有以最后一个字符结尾的连续子串</strong>。</p>
 <p>例如，对于字符串 <code>“abba”</code> ：</p>
-<p>其前缀为 <code>&quot;a&quot;</code> 、 <code>&quot;ab&quot;</code> 、 <code>&quot;abb&quot;</code> 。</p>
-<p>其后缀为 <code>&quot;bba&quot;</code> 、 <code>&quot;ba&quot;</code> 、 <code>&quot;a&quot;</code> 。</p>
-<h3 id="什么是最长相等前后缀？"><a href="#什么是最长相等前后缀？" class="headerlink" title="什么是最长相等前后缀？"></a>什么是最长相等前后缀？</h3><p>有了前后缀的概念，最长相等前后缀就很容易理解了。</p>
+<p>其前缀为 <code>"a"</code> 、 <code>"ab"</code> 、 <code>"abb"</code>
+。</p>
+<p>其后缀为 <code>"bba"</code> 、 <code>"ba"</code> 、 <code>"a"</code>
+。</p>
+<h3 id="什么是最长相等前后缀">什么是最长相等前后缀？</h3>
+<p>有了前后缀的概念，最长相等前后缀就很容易理解了。</p>
 <p><strong>最长相等前后缀的长度指对于某一字符串，它最大的相同前后缀长度为多少</strong>。</p>
-<p>仍然以字符串 <code>&quot;abba&quot;</code> 为例，其最长相等前后缀为 <code>&quot;a&quot;</code>，最长相等前后缀的长度为1。（而不是2，因为子串 <code>“ab”</code> 不等于 <code>“ba”</code>）。</p>
-<h3 id="什么是前缀表？如何计算前缀表？"><a href="#什么是前缀表？如何计算前缀表？" class="headerlink" title="什么是前缀表？如何计算前缀表？"></a>什么是前缀表？如何计算前缀表？</h3><p><strong>前缀表记录了模式串中当前下标位置之前的字符串（包括当前位置）的最长相等前后缀的长度数据</strong>。</p>
-<p>光看这句话可能有点懵，下面以模式串 <code>&quot;aabaaf&quot;</code> 为例写一下它的前缀表。</p>
+<p>仍然以字符串 <code>"abba"</code> 为例，其最长相等前后缀为
+<code>"a"</code>，最长相等前后缀的长度为1。（而不是2，因为子串
+<code>“ab”</code> 不等于 <code>“ba”</code>）。</p>
+<h3 id="什么是前缀表如何计算前缀表">什么是前缀表？如何计算前缀表？</h3>
+<p><strong>前缀表记录了模式串中当前下标位置之前的字符串（包括当前位置）的最长相等前后缀的长度数据</strong>。</p>
+<p>光看这句话可能有点懵，下面以模式串 <code>"aabaaf"</code>
+为例写一下它的前缀表。</p>
 <table>
 <thead>
-<tr>
-<th align="center">下标</th>
-<th align="center">0</th>
-<th align="center">1</th>
-<th align="center">2</th>
-<th align="center">3</th>
-<th align="center">4</th>
-<th align="center">5</th>
+<tr class="header">
+<th style="text-align: center;">下标</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">模式串</td>
-<td align="center">a</td>
-<td align="center">a</td>
-<td align="center">b</td>
-<td align="center">a</td>
-<td align="center">a</td>
-<td align="center">f</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">模式串</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">f</td>
 </tr>
-<tr>
-<td align="center">前缀表</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<tr class="even">
+<td style="text-align: center;">前缀表</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
 </tr>
-</tbody></table>
-<p>首先将指针放置在第一个字符 <code>&quot;a&quot;</code> 上，此时下标为0，其 <em>“当前下标位置之前的字符串（包括当前位置）”</em> 为 <code>&quot;a&quot;</code> ，字符串 <code>&quot;a&quot;</code> 的前后缀都为空，因此最长相等前后缀为0，前缀表中下标为0的位置填入0。<strong>因此对于所有前缀表，其下标为0的位置都可以直接填入0</strong>；</p>
-<p>之后将指针放置在第二个字符 <code>&quot;a&quot;</code> 上，此时下标为1，其 <em>“当前下标位置之前的字符串（包括当前位置）”</em> 为 <code>&quot;aa&quot;</code> ，字符串 <code>&quot;aa&quot;</code> 的最长相等前后缀长度为1，前缀表中下标为1的位置填入1。</p>
+</tbody>
+</table>
+<p>首先将指针放置在第一个字符 <code>"a"</code> 上，此时下标为0，其
+<em>“当前下标位置之前的字符串（包括当前位置）”</em> 为 <code>"a"</code>
+，字符串 <code>"a"</code>
+的前后缀都为空，因此最长相等前后缀为0，前缀表中下标为0的位置填入0。<strong>因此对于所有前缀表，其下标为0的位置都可以直接填入0</strong>；</p>
+<p>之后将指针放置在第二个字符 <code>"a"</code> 上，此时下标为1，其
+<em>“当前下标位置之前的字符串（包括当前位置）”</em> 为 <code>"aa"</code>
+，字符串 <code>"aa"</code>
+的最长相等前后缀长度为1，前缀表中下标为1的位置填入1。</p>
 <p>依此类推，我们可以看着模式串将前缀表填写完整。</p>
-<h3 id="前缀表和next数组有什么关系？"><a href="#前缀表和next数组有什么关系？" class="headerlink" title="前缀表和next数组有什么关系？"></a>前缀表和next数组有什么关系？</h3><p>这是个困扰了我很久的问题，因为不同的人对next数组有不同的讲法。</p>
+<h3 id="前缀表和next数组有什么关系">前缀表和next数组有什么关系？</h3>
+<p>这是个困扰了我很久的问题，因为不同的人对next数组有不同的讲法。</p>
 <p>程杰在《大话数据结构》里给出的next数组和nextval数组我到现在都没看明白，各种考研辅导老师和视频里给出的next数组定义也很不统一，一会要整体右移并且第一个位置赋-1，一会要统一减一，绕的很晕。但是代码随想录的卡尔在他的<a target="_blank" rel="noopener" href="https://www.programmercarl.com/0028.%E5%AE%9E%E7%8E%B0strStr.html#%E6%80%9D%E8%B7%AF">文章</a>和<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1PD4y1o7nd">视频</a>里解释的很清楚，我再在这里陈述一遍。</p>
-<p><em><strong>next数组可以就是前缀表本身</strong></em>，也可以是整体右移一位第一位赋值-1，还可以是整体减一。无论采用何种next数组都只是KMP算法实现细节，不涉及原理性的东西。</p>
+<p><strong><em>next数组可以就是前缀表本身</em></strong>，也可以是整体右移一位第一位赋值-1，还可以是整体减一。无论采用何种next数组都只是KMP算法实现细节，不涉及原理性的东西。</p>
 <p>所以在这里<strong>我们选择使next数组即为前缀表本身</strong>，这种方法更接近KMP的实现原理（前缀表），更方便我们记忆。</p>
-<h3 id="next数组（前缀表）有什么作用？"><a href="#next数组（前缀表）有什么作用？" class="headerlink" title="next数组（前缀表）有什么作用？"></a>next数组（前缀表）有什么作用？</h3><p>到现在为止我们已经掌握了一项技能，就是看着模式串写出前缀表，即写出next数组。</p>
+<h3 id="next数组前缀表有什么作用">next数组（前缀表）有什么作用？</h3>
+<p>到现在为止我们已经掌握了一项技能，就是看着模式串写出前缀表，即写出next数组。</p>
 <p>next数组之所以叫next，是因为当文本串指针与模式串指针所指字符不匹配时，可以根据next数组回溯模式串指针到新的位置来继续匹配，而不必总是回到模式串头位置。</p>
-<h3 id="next数组（前缀表）为何能回溯模式串指针？"><a href="#next数组（前缀表）为何能回溯模式串指针？" class="headerlink" title="next数组（前缀表）为何能回溯模式串指针？"></a>next数组（前缀表）为何能回溯模式串指针？</h3><p>首先我们先看一下文本串 <code>&quot;aabaabaafa&quot;</code> 是如何查找模式串 <code>&quot;aabaaf&quot;</code> 的。</p>
-<p><img src="/2023/11/23/KMP%E7%AE%97%E6%B3%95/image.gif" srcset="/img/loading.gif" lazyload alt="KMP匹配过程"></p>
-<p>文本串指针和模式串指针分别从各自字符串的头部开始一一向后比较，前五个字符 <code>&quot;aabaa&quot;</code> 都能够匹配，此时移动到第六个字符发现不匹配。</p>
+<h3 id="next数组前缀表为何能回溯模式串指针">next数组（前缀表）为何能回溯模式串指针？</h3>
+<p>首先我们先看一下文本串 <code>"aabaabaafa"</code> 是如何查找模式串
+<code>"aabaaf"</code> 的。</p>
+<figure>
+<img src="/2023/11/23/KMP%E7%AE%97%E6%B3%95/image.gif" srcset="/img/loading.gif" lazyload alt="KMP匹配过程">
+<figcaption aria-hidden="true">KMP匹配过程</figcaption>
+</figure>
+<p>文本串指针和模式串指针分别从各自字符串的头部开始一一向后比较，前五个字符
+<code>"aabaa"</code> 都能够匹配，此时移动到第六个字符发现不匹配。</p>
 <p>到这一步，暴力（或称朴素）算法就要将文本串指针回溯到第二个字符，模式串指针回溯到第一个字符重新开始匹配了。</p>
-<p>而KMP的模式串指针由 <code>&quot;f&quot;</code> 回溯至 <code>&quot;b&quot;</code>，而文本串指针不动等待继续匹配，KMP的优越性就体现出来了。</p>
-<p>那么为什么模式串指针要从 <code>&quot;f&quot;</code> 回溯至 <code>&quot;b&quot;</code>呢？</p>
+<p>而KMP的模式串指针由 <code>"f"</code> 回溯至
+<code>"b"</code>，而文本串指针不动等待继续匹配，KMP的优越性就体现出来了。</p>
+<p>那么为什么模式串指针要从 <code>"f"</code> 回溯至
+<code>"b"</code>呢？</p>
 <table>
 <thead>
-<tr>
-<th align="center">下标</th>
-<th align="center">0</th>
-<th align="center">1</th>
-<th align="center">2</th>
-<th align="center">3</th>
-<th align="center">4</th>
-<th align="center">5</th>
+<tr class="header">
+<th style="text-align: center;">下标</th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+<th style="text-align: center;">3</th>
+<th style="text-align: center;">4</th>
+<th style="text-align: center;">5</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">模式串</td>
-<td align="center">a</td>
-<td align="center">a</td>
-<td align="center">b</td>
-<td align="center">a</td>
-<td align="center">a</td>
-<td align="center">f</td>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">模式串</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">f</td>
 </tr>
-<tr>
-<td align="center">前缀表</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">0</td>
-<td align="center">1</td>
-<td align="center">2</td>
-<td align="center">0</td>
+<tr class="even">
+<td style="text-align: center;">前缀表</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>以下这句话，对于理解为什么前缀表可以告诉我们匹配失败之后跳到哪里重新匹配，非常重要！</p>
-<p><strong>下标5之前这部分的字符串（也就是字符串 <code>&quot;aabaa&quot;</code>）的最长相等的前后缀是子串 <code>&quot;aa&quot;</code>，因为找到了最长相等的前缀和后缀，匹配失败的位置是后缀子串的后面，那么我们找到与其相同的前缀的后面，并从这个位置重新匹配就可以了。</strong></p>
+<p><strong>下标5之前这部分的字符串（也就是字符串
+<code>"aabaa"</code>）的最长相等的前后缀是子串
+<code>"aa"</code>，因为找到了最长相等的前缀和后缀，匹配失败的位置是后缀子串的后面，那么我们找到与其相同的前缀的后面，并从这个位置重新匹配就可以了。</strong></p>
 <p>所以前缀表具有告诉我们当前位置匹配失败，跳到之前已经匹配过的地方的能力。</p>
 <p>但如果新的模式串所指字符依然与文本串指针所指字符不同又当如何呢？</p>
-<p>那我们继续重复上述过程，当前模式串下标为2，查询 <code>next[2 - 1]</code> 的值为1，将模式串的指针回溯到下标为1的位置，即第二个字符 <code>&#39;a&#39;</code> 。</p>
+<p>那我们继续重复上述过程，当前模式串下标为2，查询
+<code>next[2 - 1]</code>
+的值为1，将模式串的指针回溯到下标为1的位置，即第二个字符
+<code>'a'</code> 。</p>
 <p>如果一直无法与文本串指针所指字符匹配（模式串指针指向下标0位），那么文本串指针向后移一位。</p>
-<h3 id="KMP算法匹配过程总览"><a href="#KMP算法匹配过程总览" class="headerlink" title="KMP算法匹配过程总览"></a>KMP算法匹配过程总览<a id="x1"></a></h3><p><img src="/2023/11/23/KMP%E7%AE%97%E6%B3%95/image-2.gif" srcset="/img/loading.gif" lazyload alt="KMP算法匹配过程总览"></p>
+<h3 id="kmp算法匹配过程总览">KMP算法匹配过程总览<a id="x1"></a></h3>
+<figure>
+<img src="/2023/11/23/KMP%E7%AE%97%E6%B3%95/image-2.gif" srcset="/img/loading.gif" lazyload alt="KMP算法匹配过程总览">
+<figcaption aria-hidden="true">KMP算法匹配过程总览</figcaption>
+</figure>
 <p>这下我们大概了解了KMP的匹配过程，再来回顾一下：</p>
-<ol>
+<ol type="1">
 <li>首先我们需要根据模式串写出next数组（前缀表）。</li>
 <li>之后我们让<strong>文本串指针i</strong>与<strong>模式串指针j</strong>同时从各自字符串头部开始向后遍历。</li>
-<li>一旦遇到字符不匹配的情况我们根据 <code>next[j - 1]</code> 的值将模式串指针j回溯到对应的下标位置，而文本串指针i不做变化。<br>直到找到新的能够匹配的模式串指针，则继续向后匹配；<br>或者j回溯到0位也没有遇到能匹配i所指的字符，那么文本串指针i向后移一位（++i）重新匹配。</li>
-<li>如果循环到某个位置，模式串的所有字符都匹配完成了，则表示能够在文本串中找到对应子串；<br>反之，若文本串指针i走到文本串的末尾也没能匹配完所有的模式串字符，则表示不能在文本串中找到对应子串。</li>
+<li>一旦遇到字符不匹配的情况我们根据 <code>next[j - 1]</code>
+的值将模式串指针j回溯到对应的下标位置，而文本串指针i不做变化。
+直到找到新的能够匹配的模式串指针，则继续向后匹配；
+或者j回溯到0位也没有遇到能匹配i所指的字符，那么文本串指针i向后移一位（++i）重新匹配。</li>
+<li>如果循环到某个位置，模式串的所有字符都匹配完成了，则表示能够在文本串中找到对应子串；
+反之，若文本串指针i走到文本串的末尾也没能匹配完所有的模式串字符，则表示不能在文本串中找到对应子串。</li>
 </ol>
 <p>至此大功告成！</p>
-<h3 id="KMP算法的时间复杂度分析"><a href="#KMP算法的时间复杂度分析" class="headerlink" title="KMP算法的时间复杂度分析"></a>KMP算法的时间复杂度分析</h3><p>如果文本串的长度记为 <code>m</code> ，模式串的长度记为 <code>n</code>。</p>
-<p>在最差情况下（模式串在文本串的末尾才能被匹配），暴力的双for循环时间复杂度为 <code>O(mn)</code> 。</p>
-<p>而KMP只需要遍历一次文本串<code>O(m)</code>和生成next数组<code>O(n)</code>，总的时间复杂度为<code>O(m + n)</code> 。</p>
+<h3 id="kmp算法的时间复杂度分析">KMP算法的时间复杂度分析</h3>
+<p>如果文本串的长度记为 <code>m</code> ，模式串的长度记为
+<code>n</code>。</p>
+<p>在最差情况下（模式串在文本串的末尾才能被匹配），暴力的双for循环时间复杂度为
+<code>O(mn)</code> 。</p>
+<p>而KMP只需要遍历一次文本串<code>O(m)</code>和生成next数组<code>O(n)</code>，总的时间复杂度为<code>O(m + n)</code>
+。</p>
 <p>因此KMP算法可以极大地提高检索效率。</p>
 <hr>
-<h2 id="代码篇（C-）"><a href="#代码篇（C-）" class="headerlink" title="代码篇（C++）"></a>代码篇（C++）</h2><h3 id="前言-1"><a href="#前言-1" class="headerlink" title="前言"></a>前言</h3><p>Leetcode上的题目 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/description/">28. 找出字符串中第一个匹配项的下标</a> 是练习KMP代码的最佳实践，这里就从此题出发介绍KMP代码的实现。</p>
+<h2 id="代码篇c">代码篇（C++）</h2>
+<h3 id="前言-1">前言</h3>
+<p>Leetcode上的题目 <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/description/">28.
+找出字符串中第一个匹配项的下标</a>
+是练习KMP代码的最佳实践，这里就从此题出发介绍KMP代码的实现。</p>
 <blockquote>
-<p><strong>给你两个字符串 haystack 和 needle ，请你在 haystack 字符串中找出 needle 字符串的第一个匹配项的下标（下标从 0 开始）。如果 needle 不是 haystack 的一部分，则返回-1。</strong></p>
-<p><strong>示例</strong> 1：<br>输入：haystack &#x3D; “sadbutsad”, needle &#x3D; “sad”<br>输出：0<br>解释：”sad” 在下标 0 和 6 处匹配。<br>第一个匹配项的下标是 0 ，所以返回 0 。</p>
-<p><strong>示例</strong> 2：<br>输入：haystack &#x3D; “leetcode”, needle &#x3D; “leeto”<br>输出：-1<br>解释：”leeto” 没有在 “leetcode” 中出现，所以返回 -1 。</p>
+<p><strong>给你两个字符串 haystack 和 needle ，请你在 haystack
+字符串中找出 needle 字符串的第一个匹配项的下标（下标从 0 开始）。如果
+needle 不是 haystack 的一部分，则返回-1。</strong></p>
+<p><strong>示例</strong> 1： 输入：haystack = "sadbutsad", needle =
+"sad" 输出：0 解释："sad" 在下标 0 和 6 处匹配。 第一个匹配项的下标是 0
+，所以返回 0 。</p>
+<p><strong>示例</strong> 2： 输入：haystack = "leetcode", needle =
+"leeto" 输出：-1 解释："leeto" 没有在 "leetcode" 中出现，所以返回 -1
+。</p>
 </blockquote>
-<h3 id="KMP算法的代码套路"><a href="#KMP算法的代码套路" class="headerlink" title="KMP算法的代码套路"></a>KMP算法的代码套路</h3><p>根据我们在<a href="#x1">理论篇 - KMP算法匹配过程总览</a>中的介绍，实现KMP算法需要两个函数，其中一个用来计算next数组，另一个用来匹配模式串。</p>
+<h3 id="kmp算法的代码套路">KMP算法的代码套路</h3>
+<p>根据我们在<a href="#x1">理论篇 -
+KMP算法匹配过程总览</a>中的介绍，实现KMP算法需要两个函数，其中一个用来计算next数组，另一个用来匹配模式串。</p>
 <p>根据我的观察这两个函数的书写都有如下的固定套路：</p>
-<ol>
+<ol type="1">
 <li>初始化</li>
 <li>处理两指针所指字符不等情况</li>
 <li>处理两指针所指字符相等情况</li>
 </ol>
 <p>在理解的基础上记住这三步走就能轻松手撕KMP。</p>
-<h3 id="getNext-函数的实现"><a href="#getNext-函数的实现" class="headerlink" title="getNext()函数的实现"></a>getNext()函数的实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getNext</span><span class="hljs-params">(<span class="hljs-type">int</span>* next, <span class="hljs-type">const</span> string&amp; s)</span> </span>&#123;<br>    <span class="hljs-comment">//初始化：next[0] = 0，j为前缀尾指针，i为后缀尾指针</span><br>    next[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; s.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>        <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[j] != s[i]) &#123;<br>            j = next[j - <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>        <span class="hljs-keyword">if</span> (s[j] == s[i]) ++j;<br>        next[i] = j;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><em>为什么选择返回类型为 <code>void</code> 的函数，并且多传入一个空的next数组？</em></p>
-<p>因为C++不允许函数返回一个完整的数组，所以我的第一想法是返回指向next数组的 <code>int*</code> 指针，但如果这个指针指向 <code>getNext()</code> 作用域内的局部数组，那么当函数结束时，该指针将成为一个野指针，继续在外部调用这个指针可能会导致未定义行为（虽然我这样写了leetcode没有报错，但仍然不建议这么做）。</p>
+<h3 id="getnext函数的实现">getNext()函数的实现</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getNext</span><span class="hljs-params">(<span class="hljs-type">int</span>* next, <span class="hljs-type">const</span> string&amp; s)</span> </span>&#123;<br>    <span class="hljs-comment">//初始化：next[0] = 0，j为前缀尾指针，i为后缀尾指针</span><br>    next[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>    <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; s.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>        <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[j] != s[i]) &#123;<br>            j = next[j - <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>        <span class="hljs-keyword">if</span> (s[j] == s[i]) ++j;<br>        next[i] = j;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><em>为什么选择返回类型为 <code>void</code>
+的函数，并且多传入一个空的next数组？</em></p>
+<p>因为C++不允许函数返回一个完整的数组，所以我的第一想法是返回指向next数组的
+<code>int*</code> 指针，但如果这个指针指向 <code>getNext()</code>
+作用域内的局部数组，那么当函数结束时，该指针将成为一个野指针，继续在外部调用这个指针可能会导致未定义行为（虽然我这样写了leetcode没有报错，但仍然不建议这么做）。</p>
 <p>如果我们不想从外部传入一个next数组，那么还有两种方法：</p>
-<ol>
-<li>一种方法就是在函数内部定义一个静态数组。但我们需要一个变量 <code>s.size()</code> 来确定静态数组的大小，C++不允许声明一个可变大小的静态数组，所以此方案不可行。</li>
-<li>另一种方法是使用动态分配数组（ <code>new int[]</code> ），但这种方法有个缺点是需要在主函数（匹配函数）中手动回收内存（ <code>delete []</code> ），会让主函数看起来很乱。</li>
+<ol type="1">
+<li>一种方法就是在函数内部定义一个静态数组。但我们需要一个变量
+<code>s.size()</code>
+来确定静态数组的大小，C++不允许声明一个可变大小的静态数组，所以此方案不可行。</li>
+<li>另一种方法是使用动态分配数组（ <code>new int[]</code>
+），但这种方法有个缺点是需要在主函数（匹配函数）中手动回收内存（
+<code>delete []</code> ），会让主函数看起来很乱。</li>
 </ol>
 <p>所以最好的方法还是在主函数中声明一个空next数组，之后通过指针传递到getNext()函数中。</p>
 <p>可以在菜鸟学习更多<a target="_blank" rel="noopener" href="https://www.runoob.com/cplusplus/cpp-return-arrays-from-function.html">C++从函数返回数组</a>内容。</p>
-<h4 id="1-初始化"><a href="#1-初始化" class="headerlink" title="1. 初始化"></a>1. 初始化</h4><p>在这一阶段我们初始化了两个指针，<strong>j为前缀尾指针</strong>初始指向下标0位，<strong>i为后缀尾指针</strong>初始指向下标1位；并且将next[0]初始化为0（首字符不存在相等前后缀）。接下来我们遍历后缀尾指针i，在不断地遍历中填充next数组。</p>
-<h4 id="2-处理两指针所指字符不等情况"><a href="#2-处理两指针所指字符不等情况" class="headerlink" title="2. 处理两指针所指字符不等情况"></a>2. 处理两指针所指字符不等情况</h4><p>在这种情况下我们对 <code>s[j]</code> 和 <code>s[i]</code> 内容进行比较，发现两者不相同，那么前缀尾指针j就要回退，退到哪里呢？</p>
-<p>我们回头看next数组， <code>next[j - 1]</code> 中所存储的数字表示从模式串头部到下标为 <code>j - 1</code> 的位置的字串的最长相等前后缀长度。那我们跳回到下标为 <code>next[j - 1]</code> 的位置，那么现在的新前缀尾位置 <code>j = next[j - 1]</code> 会和匹配失败时的前缀尾位置之前的字符串完全相同。</p>
-<p>当然，有可能一次回退后 <code>s[j]</code> 与 <code>s[i]</code> 仍然不相等，所以这条语句不能是 <code>if</code> 而应该是 <code>while</code>；同时我们不能允许j无限制的回退，所以 <code>while</code> 循环里加上一条限制 <code>j &gt; 0</code>，如果最后j都等于0了仍然匹配不了  <code>s[j]</code> 和 <code>s[i]</code>，那我们记 <code>next[i] = 0</code> ，同时放弃匹配当前的后缀尾指针所指字符 <code>s[i]</code> 。</p>
-<h4 id="3-处理两指针所指字符相等情况"><a href="#3-处理两指针所指字符相等情况" class="headerlink" title="3. 处理两指针所指字符相等情况"></a>3. 处理两指针所指字符相等情况</h4><p>在这种情况下我们对 <code>s[j]</code> 和 <code>s[i]</code> 内容进行比较，发现两者相同，那么前缀尾指针j就要向后移一位；</p>
-<p>同时不要忘了将新的next数组值 <code>j</code> 存储到next数组的后缀尾指针所指位置 <code>next[i]</code> ；</p>
+<h4 id="初始化">1. 初始化</h4>
+<p>在这一阶段我们初始化了两个指针，<strong>j为前缀尾指针</strong>初始指向下标0位，<strong>i为后缀尾指针</strong>初始指向下标1位；并且将next[0]初始化为0（首字符不存在相等前后缀）。接下来我们遍历后缀尾指针i，在不断地遍历中填充next数组。</p>
+<h4 id="处理两指针所指字符不等情况">2. 处理两指针所指字符不等情况</h4>
+<p>在这种情况下我们对 <code>s[j]</code> 和 <code>s[i]</code>
+内容进行比较，发现两者不相同，那么前缀尾指针j就要回退，退到哪里呢？</p>
+<p>我们回头看next数组， <code>next[j - 1]</code>
+中所存储的数字表示从模式串头部到下标为 <code>j - 1</code>
+的位置的字串的最长相等前后缀长度。那我们跳回到下标为
+<code>next[j - 1]</code> 的位置，那么现在的新前缀尾位置
+<code>j = next[j - 1]</code>
+会和匹配失败时的前缀尾位置之前的字符串完全相同。</p>
+<p>当然，有可能一次回退后 <code>s[j]</code> 与 <code>s[i]</code>
+仍然不相等，所以这条语句不能是 <code>if</code> 而应该是
+<code>while</code>；同时我们不能允许j无限制的回退，所以
+<code>while</code> 循环里加上一条限制
+<code>j &gt; 0</code>，如果最后j都等于0了仍然匹配不了 <code>s[j]</code>
+和 <code>s[i]</code>，那我们记 <code>next[i] = 0</code>
+，同时放弃匹配当前的后缀尾指针所指字符 <code>s[i]</code> 。</p>
+<h4 id="处理两指针所指字符相等情况">3. 处理两指针所指字符相等情况</h4>
+<p>在这种情况下我们对 <code>s[j]</code> 和 <code>s[i]</code>
+内容进行比较，发现两者相同，那么前缀尾指针j就要向后移一位；</p>
+<p>同时不要忘了将新的next数组值 <code>j</code>
+存储到next数组的后缀尾指针所指位置 <code>next[i]</code> ；</p>
 <p>流程走完后回到for循环，后缀尾指针i将向后移动。</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>写 <code>getNext()</code> 函数关键就是理解前缀尾指针j的含义，j的值反映了模式串中头字符到当前下标位置的字符（包括当前位置）中最长相等前后缀的长度。</p>
-<h3 id="匹配函数strStr-的实现"><a href="#匹配函数strStr-的实现" class="headerlink" title="匹配函数strStr()的实现"></a>匹配函数strStr()的实现</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">strStr</span><span class="hljs-params">(string haystack, string needle)</span> </span>&#123; <span class="hljs-comment">//haystack文本串，needle模式串</span><br>    <span class="hljs-comment">//初始化：next数组，i为文本串指针，j为模式串指针</span><br>    <span class="hljs-type">int</span> next[needle.<span class="hljs-built_in">size</span>()];<br>    <span class="hljs-built_in">getNext</span>(next, needle);<br>    <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; haystack.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>        <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; haystack[i] != needle[j]) &#123;<br>            j = next[j - <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>        <span class="hljs-keyword">if</span> (haystack[i] == needle[j]) ++j;<br>        <span class="hljs-keyword">if</span> (j == needle.<span class="hljs-built_in">size</span>()) <span class="hljs-keyword">return</span> (i - needle.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<h4 id="1-初始化-1"><a href="#1-初始化-1" class="headerlink" title="1. 初始化"></a>1. 初始化</h4><p>使用getNext()函数取得next数组；使<strong>文本串指针i</strong>初始化到文本串头部，<strong>模式串指针j</strong>初始化到模式串头部；使用for循环遍历文本串。</p>
-<h4 id="2-处理两指针所指字符不等情况-1"><a href="#2-处理两指针所指字符不等情况-1" class="headerlink" title="2. 处理两指针所指字符不等情况"></a>2. 处理两指针所指字符不等情况</h4><p>观察下这部分的代码可以发现跟 <code>getNext()</code> 第二部分是及其相似的，不同的地方只有while循环的判断条件更改了。</p>
-<p>当文本串指针i所指字符与模式串指针j所指字符不等时，需要查找 <code>next[j - 1]</code> 的值来回溯模式串指针j，直到回溯到下标为0的位置或发现匹配的字符。</p>
-<h4 id="3-处理两指针所指字符相等情况-1"><a href="#3-处理两指针所指字符相等情况-1" class="headerlink" title="3. 处理两指针所指字符相等情况"></a>3. 处理两指针所指字符相等情况</h4><p>如果两指针所指字符相等那么很简单，文本串指针i（隐藏在for循环的 <code>++i</code> 中）和模式串指针j都自增一次。</p>
-<p>如果模式串的最后一个字符被匹配，那么j将等于模式串的长度（注意字符串下标是从0开始），这时通过公式 <code>i - needle.size() + 1</code> 可以得到文本串与模式串匹配的第一个下标。</p>
-<p>如果直到for循环结束（遍历完整个文本串）都没能找到完全匹配模式串的子串，那么直接 <code>return -1</code> 表示未找到匹配的子串。</p>
-<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">strStr</span><span class="hljs-params">(string haystack, string needle)</span> </span>&#123; <span class="hljs-comment">//haystack文本串，needle模式串</span><br>        <span class="hljs-comment">//初始化：next数组，i为文本串指针，j为模式串指针</span><br>        <span class="hljs-type">int</span> next[needle.<span class="hljs-built_in">size</span>()];<br>        <span class="hljs-built_in">getNext</span>(next, needle);<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; haystack.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>            <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; haystack[i] != needle[j]) &#123;<br>                j = next[j - <span class="hljs-number">1</span>];<br>            &#125;<br>            <span class="hljs-keyword">if</span> (haystack[i] == needle[j]) ++j;<br>            <span class="hljs-keyword">if</span> (j == needle.<span class="hljs-built_in">size</span>()) <span class="hljs-keyword">return</span> (i - needle.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>);<br>            <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getNext</span><span class="hljs-params">(<span class="hljs-type">int</span>* next, <span class="hljs-type">const</span> string&amp; s)</span> </span>&#123;<br>        <span class="hljs-comment">//初始化：next[0] = 0，j为前缀尾指针，i为后缀尾指针</span><br>        next[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; s.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>            <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[j] != s[i]) &#123;<br>                j = next[j - <span class="hljs-number">1</span>];<br>            &#125;<br>            <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>            <span class="hljs-keyword">if</span> (s[j] == s[i]) ++j;<br>            next[i] = j;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
-
-<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>这篇文章从理论和代码两方面介绍了KMP算法。</p>
+<h4 id="总结">总结</h4>
+<p>写 <code>getNext()</code>
+函数关键就是理解前缀尾指针j的含义，j的值反映了模式串中头字符到当前下标位置的字符（包括当前位置）中最长相等前后缀的长度。</p>
+<h3 id="匹配函数strstr的实现">匹配函数strStr()的实现</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">strStr</span><span class="hljs-params">(string haystack, string needle)</span> </span>&#123; <span class="hljs-comment">//haystack文本串，needle模式串</span><br>    <span class="hljs-comment">//初始化：next数组，i为文本串指针，j为模式串指针</span><br>    <span class="hljs-type">int</span> next[needle.<span class="hljs-built_in">size</span>()];<br>    <span class="hljs-built_in">getNext</span>(next, needle);<br>    <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; haystack.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>        <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>        <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; haystack[i] != needle[j]) &#123;<br>            j = next[j - <span class="hljs-number">1</span>];<br>        &#125;<br>        <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>        <span class="hljs-keyword">if</span> (haystack[i] == needle[j]) ++j;<br>        <span class="hljs-keyword">if</span> (j == needle.<span class="hljs-built_in">size</span>()) <span class="hljs-keyword">return</span> (i - needle.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>);<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="初始化-1">1. 初始化</h4>
+<p>使用getNext()函数取得next数组；使<strong>文本串指针i</strong>初始化到文本串头部，<strong>模式串指针j</strong>初始化到模式串头部；使用for循环遍历文本串。</p>
+<h4 id="处理两指针所指字符不等情况-1">2. 处理两指针所指字符不等情况</h4>
+<p>观察下这部分的代码可以发现跟 <code>getNext()</code>
+第二部分是及其相似的，不同的地方只有while循环的判断条件更改了。</p>
+<p>当文本串指针i所指字符与模式串指针j所指字符不等时，需要查找
+<code>next[j - 1]</code>
+的值来回溯模式串指针j，直到回溯到下标为0的位置或发现匹配的字符。</p>
+<h4 id="处理两指针所指字符相等情况-1">3. 处理两指针所指字符相等情况</h4>
+<p>如果两指针所指字符相等那么很简单，文本串指针i（隐藏在for循环的
+<code>++i</code> 中）和模式串指针j都自增一次。</p>
+<p>如果模式串的最后一个字符被匹配，那么j将等于模式串的长度（注意字符串下标是从0开始），这时通过公式
+<code>i - needle.size() + 1</code>
+可以得到文本串与模式串匹配的第一个下标。</p>
+<p>如果直到for循环结束（遍历完整个文本串）都没能找到完全匹配模式串的子串，那么直接
+<code>return -1</code> 表示未找到匹配的子串。</p>
+<h3 id="完整代码">完整代码</h3>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">strStr</span><span class="hljs-params">(string haystack, string needle)</span> </span>&#123; <span class="hljs-comment">//haystack文本串，needle模式串</span><br>        <span class="hljs-comment">//初始化：next数组，i为文本串指针，j为模式串指针</span><br>        <span class="hljs-type">int</span> next[needle.<span class="hljs-built_in">size</span>()];<br>        <span class="hljs-built_in">getNext</span>(next, needle);<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; haystack.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>            <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; haystack[i] != needle[j]) &#123;<br>                j = next[j - <span class="hljs-number">1</span>];<br>            &#125;<br>            <span class="hljs-keyword">if</span> (haystack[i] == needle[j]) ++j;<br>            <span class="hljs-keyword">if</span> (j == needle.<span class="hljs-built_in">size</span>()) <span class="hljs-keyword">return</span> (i - needle.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>);<br>            <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getNext</span><span class="hljs-params">(<span class="hljs-type">int</span>* next, <span class="hljs-type">const</span> string&amp; s)</span> </span>&#123;<br>        <span class="hljs-comment">//初始化：next[0] = 0，j为前缀尾指针，i为后缀尾指针</span><br>        next[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; s.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>            <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[j] != s[i]) &#123;<br>                j = next[j - <span class="hljs-number">1</span>];<br>            &#125;<br>            <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>            <span class="hljs-keyword">if</span> (s[j] == s[i]) ++j;<br>            next[i] = j;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<h2 id="总结-1">总结</h2>
+<p>这篇文章从理论和代码两方面介绍了KMP算法。</p>
 <p>理论篇以问题环环相扣的方式，试着让理解KMP算法有一个清晰的顺序，并采用了一种明晰的next数组定义方式——直接取为前缀表，方便理解和记忆。</p>
-<p>代码篇总结了 <code>strSte()</code> 和 <code>getNext()</code> 两个函数的共同点，给出了KMP代码的一般套路，在理解的基础上记忆能够很快地手撕出KMP。</p>
+<p>代码篇总结了 <code>strSte()</code> 和 <code>getNext()</code>
+两个函数的共同点，给出了KMP代码的一般套路，在理解的基础上记忆能够很快地手撕出KMP。</p>
 <p>写这篇不到7k字的文章用了整整一天，有些过于耗时了。不过我本人在写这篇文章的过程中的确收获颇丰，对KMP算法有了更深层次地理解，同时也锻炼了文字表达能力，在Leetcode上第四次手撕KMP也成功在5分钟内一次AC，共勉！</p>
 
                 
@@ -686,6 +791,12 @@
 
 
 
+  
+
+
+
+
+  
   
 
 
@@ -890,6 +1001,49 @@
   });
 </script>
 
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/js/leancloud.js" ></script>
 
