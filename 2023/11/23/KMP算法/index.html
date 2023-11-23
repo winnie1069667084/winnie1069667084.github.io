@@ -26,7 +26,7 @@
 <meta property="og:image" content="http://example.com/2023/11/23/KMP%E7%AE%97%E6%B3%95/image.gif">
 <meta property="og:image" content="http://example.com/2023/11/23/KMP%E7%AE%97%E6%B3%95/image-2.gif">
 <meta property="article:published_time" content="2023-11-23T01:57:15.000Z">
-<meta property="article:modified_time" content="2023-11-23T14:58:41.615Z">
+<meta property="article:modified_time" content="2023-11-23T15:16:24.918Z">
 <meta property="article:author" content="Winnie">
 <meta property="article:tag" content="Leetcode">
 <meta property="article:tag" content="算法">
@@ -244,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          6.6k 字
+          6.8k 字
         
       </span>
     
@@ -255,7 +255,7 @@
         
         
         
-          55 分钟
+          57 分钟
         
       </span>
     
@@ -370,7 +370,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：5 分钟前
+                    本文最后更新于：几秒前
                   
                 
               </p>
@@ -541,7 +541,10 @@
 <p>如果直到for循环结束（遍历完整个文本串）都没能找到完全匹配模式串的子串，那么直接 <code>return -1</code> 表示未找到匹配的子串。</p>
 <h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">strStr</span><span class="hljs-params">(string haystack, string needle)</span> </span>&#123; <span class="hljs-comment">//haystack文本串，needle模式串</span><br>        <span class="hljs-comment">//初始化：next数组，i为文本串指针，j为模式串指针</span><br>        <span class="hljs-type">int</span> next[needle.<span class="hljs-built_in">size</span>()];<br>        <span class="hljs-built_in">getNext</span>(next, needle);<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; haystack.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>            <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; haystack[i] != needle[j]) &#123;<br>                j = next[j - <span class="hljs-number">1</span>];<br>            &#125;<br>            <span class="hljs-keyword">if</span> (haystack[i] == needle[j]) ++j;<br>            <span class="hljs-keyword">if</span> (j == needle.<span class="hljs-built_in">size</span>()) <span class="hljs-keyword">return</span> (i - needle.<span class="hljs-built_in">size</span>() + <span class="hljs-number">1</span>);<br>            <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getNext</span><span class="hljs-params">(<span class="hljs-type">int</span>* next, <span class="hljs-type">const</span> string&amp; s)</span> </span>&#123;<br>        <span class="hljs-comment">//初始化：next[0] = 0，j为前缀尾指针，i为后缀尾指针</span><br>        next[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        <span class="hljs-type">int</span> j = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; s.<span class="hljs-built_in">size</span>(); ++i) &#123;<br>            <span class="hljs-comment">//处理两指针所指字符不同情况</span><br>            <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; s[j] != s[i]) &#123;<br>                j = next[j - <span class="hljs-number">1</span>];<br>            &#125;<br>            <span class="hljs-comment">//处理两指针所指字符相同情况</span><br>            <span class="hljs-keyword">if</span> (s[j] == s[i]) ++j;<br>            next[i] = j;<br>        &#125;<br>    &#125;<br>&#125;;<br></code></pre></td></tr></table></figure>
 
-<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>这篇文章从理论和代码两方面</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>这篇文章从理论和代码两方面介绍了KMP算法。</p>
+<p>理论篇以问题环环相扣的方式，试着让理解KMP算法有一个清晰的顺序，并采用了一种明晰的next数组定义方式——直接取为前缀表，方便理解和记忆。</p>
+<p>代码篇总结了 <code>strSte()</code> 和 <code>getNext()</code> 两个函数的共同点，给出了KMP代码的一般套路，在理解的基础上记忆能够很快地手撕出KMP。</p>
+<p>写这篇不到7k字的文章用了整整一天，有些过于耗时了。不过我本人在写这篇文章的过程中的确收获颇丰，对KMP算法有了更深层次地理解，同时也锻炼了文字表达能力，在Leetcode上第四次手撕KMP也成功在5分钟内一次AC，共勉！</p>
 
                 
               </div>
