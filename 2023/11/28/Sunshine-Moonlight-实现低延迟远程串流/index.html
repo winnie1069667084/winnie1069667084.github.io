@@ -27,8 +27,10 @@
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image.png">
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-1.png">
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-2.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-3.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-4.png">
 <meta property="article:published_time" content="2023-11-28T08:27:50.000Z">
-<meta property="article:modified_time" content="2023-11-29T03:10:00.196Z">
+<meta property="article:modified_time" content="2023-11-29T03:56:34.098Z">
 <meta property="article:author" content="Winnie">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/35fc133dc92f4b0e81c855997af14aeb.jpeg">
@@ -242,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          1.9k 字
         
       </span>
     
@@ -253,7 +255,7 @@
         
         
         
-          13 分钟
+          16 分钟
         
       </span>
     
@@ -307,7 +309,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：20 分钟前
+                    本文最后更新于：5 分钟前
                   
                 
               </p>
@@ -326,9 +328,13 @@
 <li>Pasec：需要注册账号，需要被串流方有公网ipv4。</li>
 </ol>
 <p>在我看来Parsec和Sunshine的远程串流质量不相上下，但Moonlight +
-Sunshine有让人不能拒绝的理由： 1. 跨平台：Windows、Mac、Linux、Android
-2. 丰富的编码器：H.264、H.265、AV1 3. 公网ipv6访问 4.
-命令行指令：丰富的指令输入，拓展性极强</p>
+Sunshine有让人不能拒绝的理由：</p>
+<ol type="1">
+<li>跨平台：Windows、Mac、Linux、Android</li>
+<li>丰富的编码器：H.264、H.265、AV1</li>
+<li>公网ipv6访问</li>
+<li>命令行指令：丰富的指令输入，拓展性极强</li>
+</ol>
 <p>接下来介绍这套方案的具体搭建步骤。</p>
 <h1 id="公网ipv4申请可选">公网ipv4申请（可选）</h1>
 <p>由于Moonlight支持公网ipv6访问，因此拥有ipv6地址的用户可以跳过本步骤。</p>
@@ -339,8 +345,12 @@ Sunshine有让人不能拒绝的理由： 1. 跨平台：Windows、Mac、Linux�
 <p>而我们的终端设备需要连接家里的路由再过光猫才能与互联网沟通，此时路由器与光猫组成双NAT，如果我们需要远程访问家庭网络中的设备，则需要在两个路由器上都进行端口映射，十分繁琐。</p>
 <p>所以这时我们要把光猫由路由模式改为桥接模式，砍掉它的路由功能只保留光电信号转换功能。</p>
 <p>这里就以我的设备为例，讲解下光猫的桥接模式修改。</p>
-<p>首先找到家里的光猫，背面会提供以下信息，需要记住后面会用到： 1.
-Web页面地址 2. 默认用户名 3. 默认用户密码</p>
+<p>首先找到家里的光猫，背面会提供以下信息，需要记住后面会用到：</p>
+<ol type="1">
+<li>Web页面地址</li>
+<li>默认用户名</li>
+<li>默认用户密码</li>
+</ol>
 <figure>
 <img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/35fc133dc92f4b0e81c855997af14aeb.jpeg" srcset="/img/loading.gif" lazyload alt="光猫背面信息">
 <figcaption aria-hidden="true">光猫背面信息</figcaption>
@@ -356,21 +366,39 @@ Web页面地址 2. 默认用户名 3. 默认用户密码</p>
 <figcaption aria-hidden="true">Alt text</figcaption>
 </figure>
 <p>在 “网络 - 宽带配置” 选项卡中将对应的连接模式由 “PPPoE” 改为
-“Bridge”，并确认。</p>
+“Bridge”，并确认，此时设备会处于断网状态。</p>
+<p>早些年各运营商会把改桥接功能藏在超级用户里（防止客户乱改导致需要工程师频繁上门维护），现在需要改桥接的用户多了联通就把这个功能放在默认普通用户里了，可以不用再费尽心思的找超级管理账户的账号密码了。如果你的光猫仍然需要超级账户才能改桥接，请自行搜索或询问运营商取得超级管理账户和密码。</p>
 <figure>
 <img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-2.png" srcset="/img/loading.gif" lazyload alt="Alt text">
 <figcaption aria-hidden="true">Alt text</figcaption>
 </figure>
 <p>这里可以顺便来到 “网络 - WLAN配置” 选项卡中，将所有SSID的 “SSID使能”
-关闭，以关闭光猫的无线功能，减少对路由器的信号干扰。 # 软件安装</p>
+关闭，以关闭光猫的无线功能，减少对路由器的信号干扰。</p>
+<p>到这一步光猫的设置就完成了，现在转到路由器的设置，不同路由器有不同的设置方式，但殊途同归，这里拿我用的TP-LINK路由举例说明。</p>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-3.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p>登录路由器的管理界面后将 “上网方式” 由 “自动获得IP地址” 改为
+“宽带拨号上网（PPPoE）”。然后输入宽带账号和宽带密码（一般写在光猫上或打运营商电话取得），这时拨号上网的功能就转移到路由器上了，待路由获取到IP，设备就将恢复联网。</p>
+<p>此时路由获取的IP地址即为公网IP，可以通过百度搜索 “IP”
+来对照路由IP是否相同来判断是否真的获取到了公网IP。</p>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-4.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<h1 id="动态域名解析ddns">动态域名解析DDNS</h1>
+<h1 id="ip---mac绑定">IP - MAC绑定</h1>
+<h1 id="dmz主机或端口映射虚拟服务器">DMZ主机或端口映射（虚拟服务器）</h1>
+<h1 id="软件安装">软件安装</h1>
 <p>原本使用Moonlight串流只需要连接上NVIDIA的SHIELD
 GameStream服务就可以。但是这项服务在2023年的2月份被停止了，所以需要使用Sunshine代替这项服务的位置。</p>
-<p>Sunshine也是Github上的开源项目，项目地址：
-<strong>Sunshine</strong>：https://github.com/LizardByte/Sunshine</p>
-<p>Moonlight是Github上的开源项目，项目地址： <strong>moonlight-qt（for
-Windows, Mac, Linux, and Steam
-Link）</strong>：https://github.com/moonlight-stream/moonlight-qt
-<strong>moonlight-android</strong>：https://github.com/moonlight-stream/moonlight-android</p>
+<p>Sunshine也是Github上的开源项目，项目地址：</p>
+<p><strong>Sunshine</strong>：https://github.com/LizardByte/Sunshine</p>
+<p>Moonlight是Github上的开源项目，项目地址：</p>
+<p><strong>moonlight-qt（for Windows, Mac, Linux, and Steam
+Link）</strong>：https://github.com/moonlight-stream/moonlight-qt</p>
+<p><strong>moonlight-android</strong>：https://github.com/moonlight-stream/moonlight-android</p>
 
                 
               </div>
