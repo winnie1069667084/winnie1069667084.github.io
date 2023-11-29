@@ -33,8 +33,11 @@
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-6.png">
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-7.png">
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-9.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-10.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-11.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-12.png">
 <meta property="article:published_time" content="2023-11-28T08:27:50.000Z">
-<meta property="article:modified_time" content="2023-11-29T07:34:29.480Z">
+<meta property="article:modified_time" content="2023-11-29T08:42:04.277Z">
 <meta property="article:author" content="Winnie">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/35fc133dc92f4b0e81c855997af14aeb.jpeg">
@@ -248,7 +251,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.3k 字
+          5k 字
         
       </span>
     
@@ -259,7 +262,7 @@
         
         
         
-          28 分钟
+          42 分钟
         
       </span>
     
@@ -313,7 +316,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：几秒前
+                    本文最后更新于：4 分钟前
                   
                 
               </p>
@@ -435,11 +438,85 @@ Sunshine有让人不能拒绝的理由：</p>
 <p>原本使用Moonlight串流只需要连接上NVIDIA的SHIELD
 GameStream服务就可以。但是这项服务在2023年的2月份被停止了，所以需要使用Sunshine代替这项服务的位置。</p>
 <p>Sunshine是Github上的开源项目，项目地址：</p>
-<p><strong>Sunshine</strong>：<a target="_blank" rel="noopener" href="https://github.com/LizardByte/Sunshine" class="uri">https://github.com/LizardByte/Sunshine</a></p>
+<p>Sunshine：<a target="_blank" rel="noopener" href="https://github.com/LizardByte/Sunshine" class="uri">https://github.com/LizardByte/Sunshine</a></p>
+<p><strong>Sunshine安装在需要被串流的设备上</strong>，这里我将它安装在我的台式机上，安装过程略过一路Next即可。</p>
 <p>Moonlight是Github上的开源项目，项目地址：</p>
-<p><strong>moonlight-qt（for Windows, Mac, Linux, and Steam
-Link）</strong>：<a target="_blank" rel="noopener" href="https://github.com/moonlight-stream/moonlight-qt" class="uri">https://github.com/moonlight-stream/moonlight-qt</a></p>
-<p><strong>moonlight-android</strong>：<a target="_blank" rel="noopener" href="https://github.com/moonlight-stream/moonlight-android" class="uri">https://github.com/moonlight-stream/moonlight-android</a></p>
+<p>moonlight-qt（for Windows, Mac, Linux, and Steam Link）：<a target="_blank" rel="noopener" href="https://github.com/moonlight-stream/moonlight-qt" class="uri">https://github.com/moonlight-stream/moonlight-qt</a></p>
+<p>moonlight-android：<a target="_blank" rel="noopener" href="https://github.com/moonlight-stream/moonlight-android" class="uri">https://github.com/moonlight-stream/moonlight-android</a></p>
+<p><strong>Moonlight安装在接收串流的设备上</strong>，如手机、平板、笔记本等上，Github里分为两个版本，qt适用于Windows,
+Mac, Linux 和 Steam Link，android自成一个版本按需下载。</p>
+<h2 id="sunshine配置">Sunshine配置</h2>
+<p>初次启动Sunshine，网页会提醒设置账户及密码，填入后并记住供以后使用。</p>
+<p>大部分配置默认或按需调整即可，这里我介绍几个比较重要的设置。</p>
+<h3 id="ipv6访问配置">IPv6访问配置</h3>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-10.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p>如果需要开启IPv6访问，需要在 “Configuration - Advanced - Address
+Family” 中选择 “IPv4 + IPv6”。</p>
+<h3 id="编码器配置n卡">编码器配置（N卡）</h3>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-11.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p>由于我使用的是NVIDIA 30系列显卡，所以同一页面中的 “Force a Specific
+Encoder” 我选择 “NVIDIA NVENC”
+强制使用独立显卡进行编码（而不使用CPU的核芯显卡 “Intel QuickSync”
+进行编码）。</p>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-12.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p>之后来到 “Configuration - NVIDIA NVENC Encoder” 选项卡，更改
+“Performance preset” 为 "P6" 、 “Two-pass mode” 为 “Full resolution
+(slower)” 以提高编码质量。如果出现编码过载（依照任务管理器 - GPU - Video
+Encode是否满载判断）或者编码延迟过高（Moonlight性能统计中可看编码延迟，快捷键<code>ctrl + alt + shift + S</code>）可以适当降低编码质量。</p>
+<h3 id="快速应用启动配置">快速应用启动配置</h3>
+<p>Sunshine默认给出了Desktop和Steam的应用程序配置，这里我以 Steam 和
+Forza Horizon 5 为例讲解如何配置应用程序的快速启动</p>
+<h4 id="steam">Steam</h4>
+<ol type="1">
+<li>“Application Name” 填入 “Steam”
+（不要在Sunshine中填入任何中文字符，很有可能会导致Moonlight报Error
+-1错误）</li>
+<li>“Command Preparations” 中填入一条 Undo 命令 “steam -shutdown”
+用于在用户退出串流后退出steam，并且勾选 “Run with Admin”。</li>
+<li>“Detached Commands” 加入一条命令 “steam steam://open/bigpicture”
+用于以大屏幕模式启动Steam。</li>
+<li>“Detached Commands” 加入一条命令 “steam -tenfoot”
+在Steam已启动的情况下切换为大屏幕模式（此命令在当前Steam版本下不可用）。</li>
+<li>“Working Directory” 中填入你的Steam安装目录，如 “C:Files
+(x86)”。</li>
+<li>勾选 “Run as administrator”。</li>
+<li>Save保存。</li>
+</ol>
+<h4 id="forza-horzon-5">Forza Horzon 5</h4>
+<ol type="1">
+<li>“Application Name” 填入 “Forza Horizon 5”
+（不要在Sunshine中填入任何中文字符，很有可能会导致Moonlight报Error
+-1错误）</li>
+<li>“Command Preparations” 中填入一条 Undo 命令 “steam -shutdown”
+用于在用户退出串流后退出steam，并且勾选 “Run with Admin”。</li>
+<li>“Detached Commands” 加入一条命令 “steam steam://rungameid/1551360”
+用于启动该游戏。</li>
+<li>“Detached Commands” 加入一条命令 “steam -tenfoot”
+在Steam已启动的情况下切换为大屏幕模式（此命令在当前Steam版本下不可用）。</li>
+<li>“Working Directory” 中填入你的Steam安装目录，如 “C:Files
+(x86)”。</li>
+<li>勾选 “Run as administrator”</li>
+<li>点击 “Find Cover”，Sunshine将根据填入的 “Application Name”
+自动检索目标封面，选择最适合的一个。</li>
+<li>Save保存。</li>
+</ol>
+<p>Moonlight的配置非常简单，且都有汉化这里就不再细讲了。</p>
+<p>到这一步应该能够实现最基本的公网串流了，实测在同市环境下网络延迟不超过20ms。</p>
+<p>但这套方案还有很多问题需要解决：</p>
+<ol type="1">
+<li>串流开始后需要手动切换分辨率及刷新率。</li>
+<li>被串流设备需要保持显示器开启才能串流画面。</li>
+<li>设备睡眠或关机后无法被唤醒。</li>
+</ol>
 
                 
               </div>
