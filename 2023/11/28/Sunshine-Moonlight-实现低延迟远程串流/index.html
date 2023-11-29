@@ -16,12 +16,12 @@
   <meta name="author" content="Winnie">
   <meta name="keywords" content="">
   
-    <meta name="description" content="前言 这两天沉迷于搞远程串流，市面上有很多远程串流软件，我用过的就有如：Windows远程桌面连接、向日葵、Pasec等。最终还是选择了Sunshine + Moonlight的方案，在这里写一篇博客记录下整个过程。 方案优势 在介绍Moonlight之前首先谈一谈其余的远程串流有什么缺点。  Windows远程桌面：需要被串流方有公网ipv4，延迟较高，对视频、游戏的支持不好，只适合">
+    <meta name="description" content="前言 这两天沉迷于搞远程串流，市面上有很多远程串流软件，我用过的就有如：Windows远程桌面连接、向日葵、Pasec等。最终还是选择了Sunshine + Moonlight的方案，在这里写一篇博客记录下整个过程。 网络篇 公网IPv4申请（可选） 由于Moonlight支持公网IPv6访问，因此拥有IPv6地址的用户可以跳过本步骤。 对各运营商来说IPv4地址是紧缺资源，所以申请各">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Sunshine + Moonlight 实现低延迟远程串流">
 <meta property="og:url" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/index.html">
 <meta property="og:site_name" content="Winnie的个人博客">
-<meta property="og:description" content="前言 这两天沉迷于搞远程串流，市面上有很多远程串流软件，我用过的就有如：Windows远程桌面连接、向日葵、Pasec等。最终还是选择了Sunshine + Moonlight的方案，在这里写一篇博客记录下整个过程。 方案优势 在介绍Moonlight之前首先谈一谈其余的远程串流有什么缺点。  Windows远程桌面：需要被串流方有公网ipv4，延迟较高，对视频、游戏的支持不好，只适合">
+<meta property="og:description" content="前言 这两天沉迷于搞远程串流，市面上有很多远程串流软件，我用过的就有如：Windows远程桌面连接、向日葵、Pasec等。最终还是选择了Sunshine + Moonlight的方案，在这里写一篇博客记录下整个过程。 网络篇 公网IPv4申请（可选） 由于Moonlight支持公网IPv6访问，因此拥有IPv6地址的用户可以跳过本步骤。 对各运营商来说IPv4地址是紧缺资源，所以申请各">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/35fc133dc92f4b0e81c855997af14aeb.jpeg">
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image.png">
@@ -29,8 +29,12 @@
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-2.png">
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-3.png">
 <meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-4.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-5.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-6.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-7.png">
+<meta property="og:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-9.png">
 <meta property="article:published_time" content="2023-11-28T08:27:50.000Z">
-<meta property="article:modified_time" content="2023-11-29T03:56:34.098Z">
+<meta property="article:modified_time" content="2023-11-29T07:34:29.480Z">
 <meta property="article:author" content="Winnie">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="http://example.com/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/35fc133dc92f4b0e81c855997af14aeb.jpeg">
@@ -244,7 +248,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          3.3k 字
         
       </span>
     
@@ -255,7 +259,7 @@
         
         
         
-          16 分钟
+          28 分钟
         
       </span>
     
@@ -309,7 +313,7 @@
               <p class="note note-info">
                 
                   
-                    本文最后更新于：5 分钟前
+                    本文最后更新于：几秒前
                   
                 
               </p>
@@ -320,28 +324,13 @@
                 <h1 id="前言">前言</h1>
 <p>这两天沉迷于搞远程串流，市面上有很多远程串流软件，我用过的就有如：Windows远程桌面连接、向日葵、Pasec等。最终还是选择了Sunshine
 + Moonlight的方案，在这里写一篇博客记录下整个过程。</p>
-<h1 id="方案优势">方案优势</h1>
-<p>在介绍Moonlight之前首先谈一谈其余的远程串流有什么缺点。</p>
-<ol type="1">
-<li>Windows远程桌面：需要被串流方有公网ipv4，延迟较高，对视频、游戏的支持不好，只适合日常办公。</li>
-<li>向日葵：需要注册账号，高级功能需要付费解锁，恼人的弹窗广告，免费版也只适合日常办公。</li>
-<li>Pasec：需要注册账号，需要被串流方有公网ipv4。</li>
-</ol>
-<p>在我看来Parsec和Sunshine的远程串流质量不相上下，但Moonlight +
-Sunshine有让人不能拒绝的理由：</p>
-<ol type="1">
-<li>跨平台：Windows、Mac、Linux、Android</li>
-<li>丰富的编码器：H.264、H.265、AV1</li>
-<li>公网ipv6访问</li>
-<li>命令行指令：丰富的指令输入，拓展性极强</li>
-</ol>
-<p>接下来介绍这套方案的具体搭建步骤。</p>
-<h1 id="公网ipv4申请可选">公网ipv4申请（可选）</h1>
-<p>由于Moonlight支持公网ipv6访问，因此拥有ipv6地址的用户可以跳过本步骤。</p>
-<p>对各运营商来说ipv4地址是紧缺资源，所以申请各运营商的ipv4地址的难易程度也不尽相同。</p>
-<p>本人目前在郑州市区使用的是联通的宽带，申请过程非常简单。只需要拨打联通宽带“98480”电话，告诉客服你需要申请公网ip即可，等客服确认你的身份，并且询问过你开公网ip的用途（家用远程设备访问、游戏服务器搭建等）后当时就能开通。</p>
-<h1 id="光猫改桥接模式">光猫改桥接模式</h1>
-<p>但这时虽然拿到了公网ip还不能直接使用，宽带运营商在装家用带宽时会将光猫默认设置为路由模式，此时的光猫除了进行一般的光电信号转换外，还有路由器的功能。</p>
+<h1 id="网络篇">网络篇</h1>
+<h2 id="公网ipv4申请可选">公网IPv4申请（可选）</h2>
+<p>由于Moonlight支持公网IPv6访问，因此拥有IPv6地址的用户可以跳过本步骤。</p>
+<p>对各运营商来说IPv4地址是紧缺资源，所以申请各运营商的IPv4地址的难易程度也不尽相同。</p>
+<p>本人目前在郑州市区使用的是联通的宽带，申请过程非常简单。只需要拨打联通宽带“98480”电话，告诉客服你需要申请公网IP即可，等客服确认你的身份，并且询问过你开公网IP的用途（家用远程设备访问、游戏服务器搭建等）后当时就能开通。</p>
+<h2 id="光猫改桥接模式">光猫改桥接模式</h2>
+<p>但这时虽然拿到了公网IP还不能直接使用，宽带运营商在装家用带宽时会将光猫默认设置为路由模式，此时的光猫除了进行一般的光电信号转换外，还有路由器的功能。</p>
 <p>而我们的终端设备需要连接家里的路由再过光猫才能与互联网沟通，此时路由器与光猫组成双NAT，如果我们需要远程访问家庭网络中的设备，则需要在两个路由器上都进行端口映射，十分繁琐。</p>
 <p>所以这时我们要把光猫由路由模式改为桥接模式，砍掉它的路由功能只保留光电信号转换功能。</p>
 <p>这里就以我的设备为例，讲解下光猫的桥接模式修改。</p>
@@ -387,18 +376,70 @@ Sunshine有让人不能拒绝的理由：</p>
 <img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-4.png" srcset="/img/loading.gif" lazyload alt="Alt text">
 <figcaption aria-hidden="true">Alt text</figcaption>
 </figure>
-<h1 id="动态域名解析ddns">动态域名解析DDNS</h1>
-<h1 id="ip---mac绑定">IP - MAC绑定</h1>
-<h1 id="dmz主机或端口映射虚拟服务器">DMZ主机或端口映射（虚拟服务器）</h1>
-<h1 id="软件安装">软件安装</h1>
+<p>需要注意的是，设置完路由器拨号后，光猫的Web页面将不能通过192.168.1.1访问，如需管理光猫设备需要将路由改回
+“自动获得IP” 地址再进行操作。</p>
+<h2 id="动态域名解析ddns">动态域名解析（DDNS）</h2>
+<p>家庭用户一般从运营商申请到的公网IPv4都是动态公网IP，根据不同运营商的服务策略申请到的IP会在数小时到数月内发生更改，如果不进行动态域名解析（DDNS）那么我们需要频繁的查看路由器当前的IP地址是否被更改，十分的麻烦。</p>
+<p>路由器或网络上有很多提供免费DDNS的服务商（TPLINK、花生壳等），通过注册账号即可申请到免费的域名来解析我们获得的动态公网IP。</p>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-5.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p>依然以TP-LINK路由器为例，其内置DDNS应用，我们可以很简单的申请到一个<strong>xxx.tpddns.cn</strong>地址用来解析我们的动态公网IP，之后Moonlight中需要我们填入目标IP时直接通过输入该地址解析即可。</p>
+<h2 id="ip---mac绑定">IP - MAC绑定</h2>
+<p>在上一步中我们实现了动态公网IP的DDNS（相当于固定了路由的IP地址），但同一路由器中可能连接有其他不同的设备，且这些设备的局域网内IP地址也时常变动，如果我们想精准的访问内网中的设备就需要将内网IP与设备的MAC地址绑定。</p>
+<p>MAC地址也叫物理地址、硬件地址，由网络设备制造商生产时烧录在网卡的相关芯片当中，MAC地址通常表示为12个16进制数，其地址是全球唯一的，可以当作网络硬件的身份证。</p>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-6.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p>可以看到我的局域网内有很多设备，我只想通过外网访问我的台式机，这里我添加了一个绑定设置，使得路由器只给某一确定的MAC地址（台式机）绑定固定的内网IP地址<strong>192.168.0.100</strong>，之后无论内网设备如何变动我的台式机都只会拥有唯一的内网IP
+192.168.0.100。</p>
+<h2 id="dmz主机或端口映射虚拟服务器">DMZ主机或端口映射（虚拟服务器）</h2>
+<p>之前两步，我们“固定”了公网和内网设备IP地址，唯一确定了我们想访问设备的地址，但现在还不能外网直接访问目标设备，因为实际上拥有公网IP的是路由器而非目标设备，所以这一步我们要做的就是将设备的端口一一映射到路由器中，达成我们访问路由器某一端口就能直接访问目标设备端口的目的。完成这一目标我们有两个方案可选：<strong>DMZ主机</strong>和<strong>端口映射（虚拟服务器）</strong>。</p>
+<h3 id="dmz主机">DMZ主机</h3>
+<p>所谓DMZ主机，即完全开放我们内网中的某一设备给公网，适用于内网中只有单设备需要被外部访问的情况，我目前只需要外网能够访问我的台式机即可，所以选择了这种方案。</p>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-7.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p>设置DMZ主机的方式也十分简单，只需要设置目标设备的内网IP地址即可，这里我们填上<strong>192.168.0.100</strong>就大功告成了。</p>
+<h3 id="端口映射虚拟服务器">端口映射（虚拟服务器）</h3>
+<p>端口映射，TP-LINK中又称为虚拟服务器，指的是我们将内网中的某一设备的某一端口映射到路由器的某一端口上，来达到外网访问的目的。适用于内网中有多设备需要被外网访问的情况。由于端口可控，所以安全性相比DMZ主机来说更高，但操作略显繁琐。</p>
+<figure>
+<img src="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/image-9.png" srcset="/img/loading.gif" lazyload alt="Alt text">
+<figcaption aria-hidden="true">Alt text</figcaption>
+</figure>
+<p>在上图中我们添加了一条映射规则，映射192.168.0.100（台式机）的7210端口给路由器的7210端口，并且允许TCP/UDP两种协议数据通过。内外部端口可以不同，可以类比着添加需要的其他映射规则。</p>
+<p>需要注意的点是开通端口映射的设备务必完成IP -
+MAC绑定步骤，并且不要尝试绑定外部的80和443端口。</p>
+<p>至此我们已经完成了对路由器的全部设置，可以开始进行串流软件的安装。</p>
+<h1 id="串流篇">串流篇</h1>
+<h2 id="方案优势">方案优势</h2>
+<p>在介绍Moonlight之前首先谈一谈其余的远程串流有什么缺点。</p>
+<ol type="1">
+<li>Windows远程桌面：需要被串流方有公网IPv4，延迟较高，对视频、游戏的支持不好，只适合日常办公。</li>
+<li>向日葵：需要注册账号，高级功能需要付费解锁，恼人的弹窗广告，免费版也只适合日常办公。</li>
+<li>Pasec：需要注册账号，需要被串流方有公网IPv4。</li>
+</ol>
+<p>在我看来Parsec和Sunshine的远程串流质量不相上下，但Moonlight +
+Sunshine有让人不能拒绝的理由：</p>
+<ol type="1">
+<li>跨平台：Windows、Mac、Linux、Android</li>
+<li>丰富的编码器：H.264、H.265、AV1</li>
+<li>公网IPv6访问</li>
+<li>命令行指令：丰富的指令输入，拓展性极强</li>
+</ol>
+<p>接下来介绍这套方案的具体搭建步骤。</p>
+<h2 id="软件安装">软件安装</h2>
 <p>原本使用Moonlight串流只需要连接上NVIDIA的SHIELD
 GameStream服务就可以。但是这项服务在2023年的2月份被停止了，所以需要使用Sunshine代替这项服务的位置。</p>
-<p>Sunshine也是Github上的开源项目，项目地址：</p>
-<p><strong>Sunshine</strong>：https://github.com/LizardByte/Sunshine</p>
+<p>Sunshine是Github上的开源项目，项目地址：</p>
+<p><strong>Sunshine</strong>：<a target="_blank" rel="noopener" href="https://github.com/LizardByte/Sunshine" class="uri">https://github.com/LizardByte/Sunshine</a></p>
 <p>Moonlight是Github上的开源项目，项目地址：</p>
 <p><strong>moonlight-qt（for Windows, Mac, Linux, and Steam
-Link）</strong>：https://github.com/moonlight-stream/moonlight-qt</p>
-<p><strong>moonlight-android</strong>：https://github.com/moonlight-stream/moonlight-android</p>
+Link）</strong>：<a target="_blank" rel="noopener" href="https://github.com/moonlight-stream/moonlight-qt" class="uri">https://github.com/moonlight-stream/moonlight-qt</a></p>
+<p><strong>moonlight-android</strong>：<a target="_blank" rel="noopener" href="https://github.com/moonlight-stream/moonlight-android" class="uri">https://github.com/moonlight-stream/moonlight-android</a></p>
 
                 
               </div>
