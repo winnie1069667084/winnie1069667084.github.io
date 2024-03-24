@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Windows实现仅键盘唤醒</title>
+    <link href="/2024/03/24/Windows%E5%AE%9E%E7%8E%B0%E4%BB%85%E9%94%AE%E7%9B%98%E5%94%A4%E9%86%92/"/>
+    <url>/2024/03/24/Windows%E5%AE%9E%E7%8E%B0%E4%BB%85%E9%94%AE%E7%9B%98%E5%94%A4%E9%86%92/</url>
+    
+    <content type="html"><![CDATA[<h1 id="前言">前言</h1><p>Windows电源管理中的“屏幕和睡眠”选项卡提供了对计算机闲置时的节能选项，</p><p>能够在长时间无操作后触发关闭屏幕或睡眠状态，</p><p>对于我这台日常使用就有300W以上的用电怪兽来说相当有用。</p><p>但长期以来我都被一个问题困扰，电脑的睡眠状态总被鼠标运动中断。</p><p>鼠标作为桌面上的可移动设备相当容易被误触，</p><p>因此我想能否只通过敲击键盘或按下电源按钮唤醒电脑。</p><p>网上给出的建议相当简单，</p><p>在“设备管理器 - 鼠标和其他指针设备 - 属性 -电源管理”中关闭“允许此设备唤醒计算机”。</p><p>但我尝试了很多遍未能成功。</p><h1 id="解决方法">解决方法</h1><p>在知乎里看到<a href="https://www.zhihu.com/question/48154015">这篇帖子</a>里"Kenny"的回答，帮助我排查了移动鼠标导致唤醒的设备。</p><p>首先在Windows Terminal中输入命令：</p><p><code>powercfg /devicequery wake_armed</code></p><p>查看所有可唤醒的设备。</p><p>之后我的Terminal给出了如下设备列表：</p><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">HID</span> Keyboard Device (<span class="hljs-number">008</span>)<br><span class="hljs-attribute">HID</span>-compliant mouse (<span class="hljs-number">005</span>)<br><span class="hljs-attribute">Intel</span>(R) Ethernet Controller (<span class="hljs-number">3</span>) I225-V #<span class="hljs-number">2</span><br><span class="hljs-attribute">HID</span> Keyboard Device (<span class="hljs-number">017</span>)<br><span class="hljs-attribute">Realtek</span> <span class="hljs-number">8811</span>CU Wireless LAN <span class="hljs-number">802</span>.<span class="hljs-number">11</span>ac USB NIC<br></code></pre></td></tr></table></figure><p>逐个排查发现是“Realtek 8811CU Wireless LAN 802.11ac USBNIC”导致的。</p><p>使用命令禁用即可。</p><p><code>powercfg /devicedisablewake "Realtek 8811CU Wireless LAN 802.11ac USB NIC"</code></p><p>至于为什么无线鼠标可以通过无线网卡设备唤醒计算机尚不可知。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Windows</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Windows</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Sunshine + Moonlight 实现低延迟远程串流</title>
     <link href="/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/"/>
     <url>/2023/11/28/Sunshine-Moonlight-%E5%AE%9E%E7%8E%B0%E4%BD%8E%E5%BB%B6%E8%BF%9F%E8%BF%9C%E7%A8%8B%E4%B8%B2%E6%B5%81/</url>
